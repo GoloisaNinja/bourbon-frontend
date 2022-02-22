@@ -1,0 +1,95 @@
+@import '../../scss/mixins.scss';
+$blue-text: #7aadff;
+
+.card_container {
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		transform: scale(1.03);
+	}
+}
+.image_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #696969;
+	max-width: 100%;
+}
+.image {
+	max-width: 100%;
+	height: auto;
+	aspect-ratio: 4.5/3;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	flex: 1;
+}
+.card_container_lower {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	background-color: #1a1a1a;
+	flex: 1;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.card_title {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	> h2 {
+		font-weight: 600;
+		color: #eee;
+		font-size: 16px;
+		@media (min-width: 1000px) {
+			font-size: 30px;
+		}
+	}
+}
+.card_details {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	> table {
+		border-collapse: collapse;
+		color: #eee;
+		text-align: left;
+		> thead {
+			> tr {
+				> th {
+					color: $blue-text;
+					font-weight: 700;
+					padding: 0 10px;
+					vertical-align: center;
+					font-size: 12px;
+					@media (min-width: 1000px) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+		> tbody {
+			> tr {
+				> td {
+					color: #eee;
+					padding: 5px 10px;
+					font-size: 10px;
+					font-weight: 600;
+					vertical-align: center;
+					@media (min-width: 1000px) {
+						font-size: 14px;
+					}
+				}
+			}
+		}
+	}
+}
+.card_button {
+	display: inline-block;
+	width: 100%;
+	margin: 20px 0;
+}
+.bourbon_button {
+	@include gradient_button;
+}

@@ -1,0 +1,10 @@
+$bourbon-bg: url('../../images/landing.jpg');
+
+.img_bg {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4/3;
+	background: $bourbon-bg;
+	background-size: cover;
+	background-repeat: no-repeat;
+}

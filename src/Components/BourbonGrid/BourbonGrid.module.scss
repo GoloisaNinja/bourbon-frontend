@@ -1,0 +1,41 @@
+@import '../../scss/mixins.scss';
+
+.grid_label {
+	margin-top: 25px;
+	text-align: center;
+	padding: 15px 0;
+	> h1 {
+		color: #7aadff;
+	}
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-content: center;
+	align-items: stretch;
+	grid-gap: 25px;
+	padding: 10px;
+	@media (min-width: 650px) {
+		grid-template-columns: 1fr 1fr;
+	}
+	@media (min-width: 1200px) {
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 15px;
+	}
+}
+.btn_group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+	> button:first-child {
+		margin-right: 25px;
+	}
+	> button {
+		@include gradient-button;
+		width: 50px;
+		> svg {
+			font-weight: bold;
+		}
+	}
+}
