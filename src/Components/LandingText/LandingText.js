@@ -1,5 +1,10 @@
 import { ImQuotesLeft, ImQuotesRight } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
+import {
+	HiOutlineSearchCircle,
+	HiOutlineCollection,
+	HiOutlineClipboard,
+} from 'react-icons/hi';
 import styles from './LandingText.module.scss';
 
 const LandingText = () => {
@@ -23,7 +28,9 @@ const LandingText = () => {
 			</div>
 			<div className={styles.landing_grid}>
 				<div className={styles.feature_card}>
-					<p>Search over 700 bourbons</p>
+					<p>
+						<HiOutlineSearchCircle /> Search over 700 bourbons
+					</p>
 					<p>
 						Filter your search by bottler, title, age, price, and more. Our
 						bourbon data contains reviews by Whiskey Raiders to help you find
@@ -31,7 +38,9 @@ const LandingText = () => {
 					</p>
 				</div>
 				<div className={styles.feature_card}>
-					<p>Create your digital collection</p>
+					<p>
+						<HiOutlineCollection /> Create your digital collection
+					</p>
 					<p>
 						Sign In or Register for an account to create your digital collection
 						of bourbons. Ensure you never forget all the amazing bourbon you've
@@ -39,7 +48,9 @@ const LandingText = () => {
 					</p>
 				</div>
 				<div className={styles.feature_card}>
-					<p>Build the ulitmate sharable wishlist</p>
+					<p>
+						<HiOutlineClipboard /> Build the ulitmate sharable wishlist
+					</p>
 					<p>
 						There is always another bourbon you want to own. Create an account
 						and start building your ultimate bourbon wishlist. You can even

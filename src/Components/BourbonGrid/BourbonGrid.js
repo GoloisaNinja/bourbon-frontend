@@ -3,11 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import BourbonCard from '../BourbonCard/BourbonCard';
 import { getPaginatedBourbons } from '../../Api/Api';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
+import Loading from '../Loading/Loading';
 import styles from './BourbonGrid.module.scss';
 
 const BourbonGrid = () => {
 	const [bourbons, setBourbons] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [sortBy, setSortBy] = useState('title');
 	const [lastPage, setLastPage] = useState(20);
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -31,7 +33,7 @@ const BourbonGrid = () => {
 				page = 1;
 			}
 			try {
-				const result = await getPaginatedBourbons(page);
+				const result = await getPaginatedBourbons(page, sortBy);
 				setCurrentPage(parseInt(page));
 				setBourbons(result.bourbons);
 				setLastPage(Math.ceil(result.total_records / 20));
@@ -40,8 +42,8 @@ const BourbonGrid = () => {
 			}
 		};
 		fetchBourbons();
-	}, [location.search]);
-	return (
+	}, [location.search, sortBy]);
+	return bourbons.length > 0 ? (
 		<>
 			<div className={styles.grid_label}>
 				<h1>
@@ -72,6 +74,8 @@ const BourbonGrid = () => {
 				</button>
 			</div>
 		</>
+	) : (
+		<Loading />
 	);
 };
 export default BourbonGrid;
