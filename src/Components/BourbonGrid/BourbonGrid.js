@@ -9,7 +9,6 @@ import styles from './BourbonGrid.module.scss';
 const BourbonGrid = () => {
 	const [bourbons, setBourbons] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [sortBy, setSortBy] = useState('title');
 	const [lastPage, setLastPage] = useState(20);
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -26,6 +25,7 @@ const BourbonGrid = () => {
 	};
 
 	useEffect(() => {
+		const sortBy = 'title';
 		const params = new URLSearchParams(location.search);
 		let page = params.get('page');
 		const fetchBourbons = async () => {
@@ -42,7 +42,7 @@ const BourbonGrid = () => {
 			}
 		};
 		fetchBourbons();
-	}, [location.search, sortBy]);
+	}, [location.search]);
 	return bourbons.length > 0 ? (
 		<>
 			<div className={styles.grid_label}>
