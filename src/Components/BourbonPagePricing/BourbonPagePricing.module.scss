@@ -1,0 +1,19 @@
+@import '../../scss/colors.scss';
+
+.price_container {
+	display: flex;
+	align-items: center;
+	> p:first-child {
+		color: #fff;
+		font-size: 25px;
+		font-weight: bold;
+		margin-right: 5px;
+	}
+}
+.price {
+	font-size: 25px;
+	opacity: 0.5;
+}
+.active {
+	opacity: 1;
+}

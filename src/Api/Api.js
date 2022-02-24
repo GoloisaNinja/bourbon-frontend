@@ -28,6 +28,19 @@ export const getPaginatedBourbons = async (page, sortBy, dir = 'asc') => {
 	}
 };
 
+export const getSingleBourbon = async (id) => {
+	try {
+		const response = await axios.get(
+			`${baseURL}/bourbons/${id}?apiKey=${apikey}`
+		);
+		if (response.status === 200) {
+			return response.data;
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // User Auth Calls
 
 export const loginUser = async (email, password) => {

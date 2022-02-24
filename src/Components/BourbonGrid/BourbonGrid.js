@@ -21,7 +21,7 @@ const BourbonGrid = () => {
 			setCurrentPage(currentPage - 1);
 			navigate(`/bourbons?page=${currentPage - 1}`);
 		}
-		window.scroll(0, 0);
+		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	};
 
 	useEffect(() => {
@@ -52,15 +52,7 @@ const BourbonGrid = () => {
 			</div>
 			<div className={styles.grid}>
 				{bourbons.map((bourbon) => (
-					<BourbonCard
-						key={bourbon._id}
-						title={bourbon.title}
-						image={bourbon.image}
-						bottler={bourbon.bottler}
-						distiller={bourbon.distiller}
-						abv={bourbon.abv}
-						age={bourbon.age}
-					/>
+					<BourbonCard key={bourbon._id} bourbon={bourbon} />
 				))}
 			</div>
 			<div className={styles.btn_group}>
