@@ -7,7 +7,7 @@
 	justify-content: center;
 	align-items: center;
 	background-color: #00232c;
-	margin: 15px;
+	margin: 50px 15px;
 	border-radius: 8px;
 	> h1 {
 		@include gradient_text;
@@ -27,8 +27,9 @@
 	}
 }
 .grid_intro {
-	margin: 50px 15px;
+	margin: 0px 15px;
 	> h2 {
+		margin: 0;
 		color: $blue-color;
 	}
 }
@@ -38,7 +39,7 @@
 	justify-content: center;
 	align-items: stretch;
 	grid-gap: 25px;
-	margin: 20px 15px;
+	margin: 50px 15px;
 	@media (min-width: 600px) {
 		grid-template-columns: 1fr 1fr 1fr;
 	}
