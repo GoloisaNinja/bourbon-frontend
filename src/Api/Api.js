@@ -15,13 +15,13 @@ const apikey = prod ? configObject.prod.apiKey : configObject.dev.apiKey;
 
 // Bourbon Calls
 
-export const getPaginatedBourbons = async (page, sortBy, dir = 'asc') => {
+export const getPaginatedBourbons = async (page, search, sort) => {
 	try {
-		const bourbons = await axios.get(
-			`${baseURL}/bourbons?sort=${sortBy}_${dir}&page=${page}&apiKey=${apikey}`
+		const response = await axios.get(
+			`${baseURL}/bourbons?search=${search}&sort=${sort}&page=${page}&apiKey=${apikey}`
 		);
-		if (bourbons.data.bourbons.length > 0) {
-			return bourbons.data;
+		if (response.data.bourbons.length > 0) {
+			return response;
 		}
 	} catch (error) {
 		console.log(error);
