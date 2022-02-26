@@ -21,8 +21,8 @@
 	margin: 0 auto;
 }
 .title {
+	@include gradient-text;
 	font-size: 50px;
-	color: $blue-color;
 	margin-bottom: 0;
 }
 .lower_container {
