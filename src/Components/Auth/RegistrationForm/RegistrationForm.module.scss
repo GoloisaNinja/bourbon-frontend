@@ -32,11 +32,12 @@
 			color: $blue-color;
 		}
 		> input {
-			font-size: 16px;
+			font-size: 18px;
 			color: #eee;
 			padding: 10px;
 			color: #696969;
 			margin-bottom: 25px;
+			border-radius: 5px;
 		}
 		> button {
 			@include gradient_button;

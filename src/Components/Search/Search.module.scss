@@ -11,10 +11,8 @@
 		width: 100%;
 		font-size: 18px;
 		padding: 10px;
-		background-color: #292929;
-		border: 1px solid $blue-color;
+		background-color: #eee;
 		border-radius: 5px;
-		color: lighten($pink-color, 15%);
 		&::placeholder {
 			color: #707070;
 		}
@@ -25,7 +23,6 @@
 		outline: none;
 		background-color: $pink-color;
 		color: #eee;
-		border: 1px solid $pink-color;
 		border-radius: 5px;
 		cursor: pointer;
 		margin-left: 5px;
