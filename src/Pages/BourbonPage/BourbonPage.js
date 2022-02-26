@@ -11,8 +11,9 @@ const BourbonPage = () => {
 	const params = useParams();
 	const navigate = useNavigate();
 	const bourbonId = params.bourbonId;
-	const [bourbon, setBourbon] = useState({});
+	const [bourbon, setBourbon] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [cleanReviewObject, setCleanReviewObject] = useState(null);
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
@@ -27,6 +28,22 @@ const BourbonPage = () => {
 		};
 		fetchBourbon();
 	}, [bourbonId]);
+
+	useEffect(() => {
+		if (bourbon !== null) {
+			const object = {};
+			const nullDataString =
+				'This section of the review is incomplete or has not been reviewed yet...';
+			for (const [key, value] of Object.entries(bourbon.review)) {
+				if (bourbon.review[key] === null) {
+					object[key] = nullDataString;
+				} else {
+					object[key] = value;
+				}
+			}
+			setCleanReviewObject(object);
+		}
+	}, [bourbon]);
 
 	return isLoading ? (
 		<Loading />
@@ -52,7 +69,7 @@ const BourbonPage = () => {
 					bottler={bourbon.bottler}
 					distiller={bourbon.distiller}
 				/>
-				<BourbonPageReview review={bourbon.review} />
+				<BourbonPageReview review={cleanReviewObject} />
 			</div>
 		</div>
 	) : (
