@@ -2,6 +2,8 @@
 
 .review_container {
 	> h1 {
+		margin-top: 0;
+		margin-bottom: 50px;
 		> svg {
 			color: $purple-color;
 		}
@@ -17,7 +19,7 @@
 	font-weight: 300;
 	font-size: 20px;
 	color: #ccc;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 }
 .section_label {
 	display: inline-block;
