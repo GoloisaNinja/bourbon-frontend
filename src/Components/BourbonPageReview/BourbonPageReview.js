@@ -2,12 +2,15 @@ import { ImQuotesLeft, ImQuotesRight } from 'react-icons/im';
 import styles from './BourbonPageReview.module.scss';
 
 const BourbonPageReview = ({ review }) => {
-	const noData = `Not reviewed yet...`;
+	const noData = `This section of the review is incomplete or has not been reviewed yet...`;
 	let { author, intro, nose, taste, finish, overall } = review;
 
-	for (let i = 0; i < Object.keys(review).length; i++) {
-		if (review[Object.keys(review)[i]] === null) {
-			review[Object.keys(review)[i]] = noData;
+	// LOOKS FOR NULL SECTIONS OF REVIEW DATA AND
+	// OVERWRITES WITH A NOT REVIEWED STRING
+
+	for (const [key] of Object.entries(review)) {
+		if (review[key] === null) {
+			review[key] = noData;
 		}
 	}
 
@@ -15,7 +18,8 @@ const BourbonPageReview = ({ review }) => {
 		<div className={styles.review_container}>
 			<h1>
 				<ImQuotesLeft /> {intro} <ImQuotesRight />{' '}
-				{author !== 'Not reviewed yet...' && (
+				{author !==
+					'This section of the review is incomplete or has not been reviewed yet...' && (
 					<span className={styles.credit}>{`Reviewed by ${author}`}</span>
 				)}
 			</h1>
