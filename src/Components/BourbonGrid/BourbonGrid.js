@@ -92,6 +92,7 @@ const BourbonGrid = ({
 							<BourbonCard key={bourbon._id} bourbon={bourbon} />
 						))}
 					</div>
+
 					<div className={styles.btn_group}>
 						<button
 							disabled={currentPage <= 1}
@@ -103,6 +104,11 @@ const BourbonGrid = ({
 							onClick={(e) => handlePage(true)}>
 							<BsChevronRight />
 						</button>
+					</div>
+					<div className={styles.pages}>
+						<p>
+							Page {currentPage} of {last_page}
+						</p>
 					</div>
 				</>
 			) : (

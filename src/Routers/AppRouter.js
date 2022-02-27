@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../Components/Header/Header';
+import Footer from '../Components/Footer/Footer';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
@@ -21,6 +22,7 @@ const AppRouter = () => {
 					<Route path='/bourbons' element={<BourbonsPage />} />
 					<Route path='/bourbons/:bourbonId' element={<BourbonPage />} />
 				</Routes>
+				<Footer />
 			</Router>
 		</Provider>
 	);

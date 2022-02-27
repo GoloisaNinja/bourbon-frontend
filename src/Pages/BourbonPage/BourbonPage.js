@@ -57,7 +57,7 @@ const BourbonPage = () => {
 			<div className={styles.lower_container}>
 				<div className={styles.score_container}>
 					<p>Score</p>
-					<p>{bourbon.review.score ? bourbon.review.score : 'NA'}</p>
+					<p>{bourbon.review.score ? bourbon.review.score : '?'}</p>
 				</div>
 				<img
 					src={bourbon.image}
