@@ -7,6 +7,7 @@ import BourbonCard from '../BourbonCard/BourbonCard';
 import Search from '../Search/Search';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 import Loading from '../Loading/Loading';
+import smoothscroll from 'smoothscroll-polyfill';
 import styles from './BourbonGrid.module.scss';
 
 const BourbonGrid = ({
@@ -42,6 +43,7 @@ const BourbonGrid = ({
 	}, [location]);
 
 	const handlePage = async (direction) => {
+		smoothscroll.polyfill();
 		const pageParams = await returnParams();
 		const { search, sort } = pageParams;
 		let baseLocation = `/bourbons?`;
