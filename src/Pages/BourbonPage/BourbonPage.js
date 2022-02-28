@@ -1,51 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getSingleBourbon } from '../../Api/Api';
+import { getSingleBourbon, cleanUpBourbon } from '../../Actions/bourbon';
 import BourbonPagePricing from '../../Components/BourbonPagePricing/BourbonPagePricing';
 import BourbonPageGrid from '../../Components/BourbonPageGrid/BourbonPageGrid';
 import BourbonPageReview from '../../Components/BourbonPageReview/BourbonPageReview';
 import Loading from '../../Components/Loading/Loading';
+import Alert from '../../Components/Alert/Alert';
+import { MdErrorOutline } from 'react-icons/md';
 import styles from './BourbonPage.module.scss';
 
-const BourbonPage = () => {
+const BourbonPage = ({
+	loading,
+	bourbon,
+	getSingleBourbon,
+	cleanUpBourbon,
+}) => {
 	const params = useParams();
 	const navigate = useNavigate();
 	const bourbonId = params.bourbonId;
-	const [bourbon, setBourbon] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [cleanReviewObject, setCleanReviewObject] = useState(null);
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.scroll(0, 0);
 		}
 		const fetchBourbon = async () => {
-			const response = await getSingleBourbon(bourbonId);
-			if (response !== null) {
-				setBourbon(response);
-			}
-			setIsLoading(false);
+			await getSingleBourbon(bourbonId);
 		};
 		fetchBourbon();
-	}, [bourbonId]);
 
-	useEffect(() => {
-		if (bourbon !== null) {
-			const object = {};
-			const nullDataString =
-				'This section of the review is incomplete or has not been reviewed yet...';
-			for (const [key, value] of Object.entries(bourbon.review)) {
-				if (bourbon.review[key] === null) {
-					object[key] = nullDataString;
-				} else {
-					object[key] = value;
-				}
-			}
-			setCleanReviewObject(object);
-		}
-	}, [bourbon]);
+		// clean up function
+		return () => cleanUpBourbon();
+	}, [bourbonId, getSingleBourbon, cleanUpBourbon]);
 
-	return isLoading ? (
+	return loading ? (
 		<Loading />
 	) : bourbon ? (
 		<div className={styles.container}>
@@ -69,13 +58,35 @@ const BourbonPage = () => {
 					bottler={bourbon.bottler}
 					distiller={bourbon.distiller}
 				/>
-				<BourbonPageReview review={cleanReviewObject} />
+				<BourbonPageReview review={bourbon.review} />
 			</div>
 		</div>
 	) : (
-		<div className={styles.container}>
-			<h1>Bourbon not found...</h1>
-		</div>
+		<>
+			<Alert />
+			<div className={styles.not_found}>
+				<button onClick={(e) => navigate(-1)}>Go Back</button>
+				<h1>
+					<MdErrorOutline />
+					Uh oh!
+				</h1>
+				<h2>Bourbon not found...</h2>
+			</div>
+		</>
 	);
 };
-export default BourbonPage;
+
+BourbonPage.propTypes = {
+	loading: PropTypes.bool.isRequired,
+	bourbon: PropTypes.object,
+	getSingleBourbon: PropTypes.func.isRequired,
+	cleanUpBourbon: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+	loading: state.bourbon.loading,
+	bourbon: state.bourbon.bourbon,
+});
+export default connect(mapStateToProps, { getSingleBourbon, cleanUpBourbon })(
+	BourbonPage
+);

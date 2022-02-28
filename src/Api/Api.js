@@ -34,7 +34,7 @@ export const getSingleBourbon = async (id) => {
 			`${baseURL}/bourbons/${id}?apiKey=${apikey}`
 		);
 		if (response.status === 200) {
-			return response.data;
+			return response;
 		}
 	} catch (error) {
 		console.log(error);
