@@ -103,6 +103,7 @@ export const loginUser = async (email, password) => {
 			config
 		);
 		if (response.status === 200) {
+			localStorage.setItem('token', response.data.token);
 			return response.data;
 		}
 	} catch (error) {
@@ -110,7 +111,8 @@ export const loginUser = async (email, password) => {
 	}
 };
 
-export const logoutUser = async (token) => {
+export const logoutUser = async () => {
+	const token = localStorage.getItem('token');
 	const config = {
 		headers: {
 			'Content-type': 'application/json',
@@ -125,6 +127,7 @@ export const logoutUser = async (token) => {
 			config
 		);
 		if (response.status === 200) {
+			localStorage.removeItem('token');
 			return response.status;
 		}
 	} catch (error) {
@@ -136,6 +139,7 @@ export const registerUser = async (formData) => {
 	const { username, email, password } = formData;
 	const config = {
 		headers: {
+			'Access-Control-Allow-Origin': '*',
 			'Content-type': 'application/json',
 		},
 	};
@@ -147,6 +151,7 @@ export const registerUser = async (formData) => {
 			config
 		);
 		if (response.status === 201) {
+			localStorage.setItem('token', response.data.token);
 			return response.data;
 		}
 	} catch (error) {
