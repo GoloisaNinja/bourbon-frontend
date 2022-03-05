@@ -5,6 +5,7 @@ import { registerUser } from '../../../Actions/auth';
 import { setAlert } from '../../../Actions/alert';
 import styles from './RegistrationForm.module.scss';
 import { useNavigate, Link } from 'react-router-dom';
+import smoothscroll from 'smoothscroll-polyfill';
 
 const RegistrationForm = ({ registerUser, setAlert }) => {
 	const [formData, setFormData] = useState({
@@ -15,15 +16,18 @@ const RegistrationForm = ({ registerUser, setAlert }) => {
 	});
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
-		const { username, email, password, confirmPassword } = formData;
+		smoothscroll.polyfill();
 		e.preventDefault();
+		const { password, confirmPassword } = formData;
 		if (password !== confirmPassword) {
-			window.scroll(0, 0);
+			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			setAlert('Passwords do not match', 'danger');
 		} else {
-			const wasSuccess = await registerUser(username, email, password);
+			const wasSuccess = await registerUser(formData);
 			if (wasSuccess.success) {
-				navigate('/');
+				navigate('/dashboard');
+			} else {
+				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			}
 		}
 	};

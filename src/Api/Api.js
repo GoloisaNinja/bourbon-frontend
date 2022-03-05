@@ -133,6 +133,7 @@ export const logoutUser = async (token) => {
 };
 
 export const registerUser = async (formData) => {
+	console.log(formData);
 	const { username, email, password } = formData;
 	const config = {
 		headers: {
@@ -141,7 +142,11 @@ export const registerUser = async (formData) => {
 	};
 	const body = JSON.stringify({ username, email, password });
 	try {
-		const response = await axios.post(`${baseURL}/user`, body, config);
+		const response = await axios.post(
+			`${baseURL}/user?apiKey=${apikey}`,
+			body,
+			config
+		);
 		if (response.status === 201) {
 			return response.data;
 		}
