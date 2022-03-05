@@ -15,6 +15,8 @@ const apikey = prod ? configObject.prod.apiKey : configObject.dev.apiKey;
 
 // Bourbon Calls
 
+// Get paginated Bourbons for the Bourbon Grid
+
 export const getPaginatedBourbons = async (page, search, sort) => {
 	try {
 		const response = await axios.get(
@@ -28,12 +30,56 @@ export const getPaginatedBourbons = async (page, search, sort) => {
 	}
 };
 
+// Get a single Bourbon by ID for the Bourbon Page
+
 export const getSingleBourbon = async (id) => {
 	try {
 		const response = await axios.get(
 			`${baseURL}/bourbons/${id}?apiKey=${apikey}`
 		);
 		if (response.status === 200) {
+			return response;
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Reviews Calls
+
+// Get All Reviews for the Individual Bourbon page
+
+export const getBourbonReviews = async (id) => {
+	try {
+		const response = await axios.get(
+			`${baseURL}/reviews/${id}?apiKey=${apikey}`
+		);
+		if (response.status === 200) {
+			return response;
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Create a review for the Individual Bourbon page
+
+export const postBourbonReview = async (formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.post(
+			`${baseURL}/review?apiKey=${apikey}`,
+			body,
+			config
+		);
+		if (response.status === 201) {
 			return response;
 		}
 	} catch (error) {

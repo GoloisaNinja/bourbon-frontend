@@ -53,7 +53,7 @@ const LandingText = () => {
 			</div>
 			<div className={styles.landing_grid}>
 				{featureArray.map((feature, index) => (
-					<FeatureCard key={index} feature={feature} />
+					<FeatureCard key={index} feature={feature} borders={true} />
 				))}
 			</div>
 			<div className={styles.btn_group}>

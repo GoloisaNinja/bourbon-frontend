@@ -13,7 +13,7 @@ const LoginForm = ({ loginUser }) => {
 		e.preventDefault();
 		const wasSuccess = await loginUser(email, password);
 		if (wasSuccess.success) {
-			navigate('/');
+			navigate('/dashboard');
 		}
 	};
 	return (

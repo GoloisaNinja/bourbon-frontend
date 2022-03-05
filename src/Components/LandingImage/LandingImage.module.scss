@@ -1,4 +1,11 @@
-$bourbon-bg: url('../../images/landing.jpg');
+@import '../../scss/colors.scss';
+$bourbon-bg: url('../../images/landing.webp');
+
+.img_container {
+	position: relative;
+	margin-top: 50px;
+	color: #eee;
+}
 
 .img_bg {
 	width: 100%;
@@ -7,4 +14,51 @@ $bourbon-bg: url('../../images/landing.jpg');
 	background: $bourbon-bg;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+.overlay {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	padding: 15px;
+	> h1:last-child {
+		margin-top: 0;
+	}
+	> h1 {
+		font-size: 40px;
+		text-shadow: 2px 2px 2px darken($pink-color, 10%);
+		word-break: break-word;
+		margin-bottom: 0;
+		@media (min-width: 350px) {
+			font-size: 50px;
+		}
+		@media (min-width: 425px) {
+			font-size: 55px;
+		}
+		@media (min-width: 475px) {
+			font-size: 65px;
+		}
+		@media (min-width: 550px) {
+			font-size: 75px;
+		}
+		@media (min-width: 650px) {
+			font-size: 85px;
+		}
+		@media (min-width: 750px) {
+			font-size: 100px;
+		}
+		@media (min-width: 850px) {
+			font-size: 125px;
+		}
+	}
+}
+.pink_span {
+	color: $pink-color;
 }

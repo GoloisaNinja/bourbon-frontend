@@ -21,6 +21,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 			payload: response,
 		});
 		dispatch(setAlert('Login Successful!', 'success'));
+		localStorage.setItem('token', response.token);
 		return { success: true };
 	} else {
 		dispatch({
@@ -31,13 +32,15 @@ export const loginUser = (email, password) => async (dispatch) => {
 	}
 };
 
-export const logoutUser = (token) => async (dispatch) => {
+export const logoutUser = () => async (dispatch) => {
+	const token = localStorage.getItem('token');
 	const response = await endSession(token);
 	if (response === 200) {
 		dispatch({
 			type: LOGOUT_SUCCESS,
 		});
 		dispatch(setAlert('Logout Successful...', 'success'));
+		localStorage.removeItem(token);
 	} else {
 		dispatch({
 			type: LOGOUT_FAILURE,
