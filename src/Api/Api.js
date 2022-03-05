@@ -133,7 +133,6 @@ export const logoutUser = async (token) => {
 };
 
 export const registerUser = async (formData) => {
-	console.log(formData);
 	const { username, email, password } = formData;
 	const config = {
 		headers: {
