@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 import { loginUser } from '../../../Actions/auth';
 import styles from './LoginForm.module.scss';
 import { useNavigate, Link } from 'react-router-dom';
+import smoothscroll from 'smoothscroll-polyfill';
 
 const LoginForm = ({ loginUser }) => {
 	const [formData, setFormData] = useState({});
 	const navigate = useNavigate();
-	const handleSubmit = async (e) => {
-		const { email, password } = formData;
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		const wasSuccess = await loginUser(email, password);
-		if (wasSuccess.success) {
-			navigate('/dashboard');
-		}
+		smoothscroll.polyfill();
+		const { email, password } = formData;
+		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+		navigate('/dashboard');
+		loginUser(email, password);
 	};
 	return (
 		<div className={styles.form_wrapper}>

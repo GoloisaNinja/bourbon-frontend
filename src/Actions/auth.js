@@ -1,4 +1,7 @@
 import {
+	START_LOGIN,
+	START_REGISTER,
+	START_LOGOUT,
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE,
 	LOGOUT_SUCCESS,
@@ -14,6 +17,9 @@ import {
 import { setAlert } from './alert';
 
 export const loginUser = (email, password) => async (dispatch) => {
+	dispatch({
+		type: START_LOGIN,
+	});
 	const response = await getUser(email, password);
 	if (response !== undefined) {
 		dispatch({
@@ -22,17 +28,18 @@ export const loginUser = (email, password) => async (dispatch) => {
 		});
 		dispatch(setAlert('Login Successful!', 'success'));
 		localStorage.setItem('token', response.token);
-		return { success: true };
 	} else {
 		dispatch({
 			type: LOGIN_FAILURE,
 		});
 		dispatch(setAlert('Login Failed', 'danger'));
-		return { success: false };
 	}
 };
 
 export const logoutUser = () => async (dispatch) => {
+	dispatch({
+		type: START_LOGOUT,
+	});
 	const token = localStorage.getItem('token');
 	const response = await endSession(token);
 	if (response === 200) {
@@ -50,19 +57,23 @@ export const logoutUser = () => async (dispatch) => {
 };
 
 export const registerUser = (formData) => async (dispatch) => {
+	dispatch({
+		type: START_REGISTER,
+	});
 	const response = await createUser(formData);
-	if (response !== undefined) {
+	if (response.status === 201) {
 		dispatch({
 			type: REGISTER_SUCCESS,
-			payload: response,
+			payload: response.data,
 		});
+		localStorage.setItem('token', response.token);
 		dispatch(setAlert('Account Created!', 'success'));
-		return { success: true };
 	} else {
 		dispatch({
 			type: REGISTER_FAILURE,
 		});
-		dispatch(setAlert('Something went wrong...', 'danger'));
-		return { success: false };
+		for (let i = 0; i < response.data.errors.length; i++) {
+			dispatch(setAlert(`${response.data.errors[i]}`, 'danger'));
+		}
 	}
 };

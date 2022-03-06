@@ -3,6 +3,9 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 // Auth Types
+export const START_LOGIN = 'START_LOGIN';
+export const START_REGISTER = 'START_REGISTER';
+export const START_LOGOUT = 'START_LOGOUT';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';

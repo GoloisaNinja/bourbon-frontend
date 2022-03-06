@@ -1,5 +1,5 @@
 import axios from 'axios';
-const prod = true;
+const prod = false;
 const configObject = {
 	prod: {
 		url: 'https://bourbon-backend.herokuapp.com/api',
@@ -150,11 +150,9 @@ export const registerUser = async (formData) => {
 			body,
 			config
 		);
-		if (response.status === 201) {
-			localStorage.setItem('token', response.data.token);
-			return response.data;
-		}
+		return response;
 	} catch (error) {
-		console.log(error);
+		console.log(error.response);
+		return error.response;
 	}
 };

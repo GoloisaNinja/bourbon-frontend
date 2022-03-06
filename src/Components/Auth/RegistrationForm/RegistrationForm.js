@@ -15,20 +15,16 @@ const RegistrationForm = ({ registerUser, setAlert }) => {
 		confirmPassword: '',
 	});
 	const navigate = useNavigate();
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		smoothscroll.polyfill();
 		e.preventDefault();
 		const { password, confirmPassword } = formData;
+		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 		if (password !== confirmPassword) {
-			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			setAlert('Passwords do not match', 'danger');
 		} else {
-			const wasSuccess = await registerUser(formData);
-			if (wasSuccess.success) {
-				navigate('/dashboard');
-			} else {
-				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-			}
+			navigate('/dashboard');
+			registerUser(formData);
 		}
 	};
 	return (

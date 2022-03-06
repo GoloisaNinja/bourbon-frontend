@@ -1,4 +1,7 @@
 import {
+	START_LOGIN,
+	START_REGISTER,
+	START_LOGOUT,
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE,
 	LOGOUT_SUCCESS,
@@ -17,6 +20,13 @@ const initialState = {
 export default function auth(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
+		case START_LOGIN:
+		case START_REGISTER:
+		case START_LOGOUT:
+			return {
+				...state,
+				loading: true,
+			};
 		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
 			return {

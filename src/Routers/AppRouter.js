@@ -6,8 +6,8 @@ import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 import BourbonsPage from '../Pages/BourbonsPage/BourbonsPage';
 import BourbonPage from '../Pages/BourbonPage/BourbonPage';
+import DashboardPage from '../Pages/DashboardPage/DashboardPage';
 import PrivateRoute from '../Components/Routing/PrivateRoute';
-import Dashboard from '../Components/Dashboard/Dashboard';
 
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -24,7 +24,7 @@ const AppRouter = () => {
 					<Route path='/bourbons' element={<BourbonsPage />} />
 					<Route path='/bourbons/:bourbonId' element={<BourbonPage />} />
 					<Route path='/dashboard' element={<PrivateRoute />}>
-						<Route path='/dashboard' element={<Dashboard />} />
+						<Route path='/dashboard' element={<DashboardPage />} />
 					</Route>
 				</Routes>
 				<Footer />
