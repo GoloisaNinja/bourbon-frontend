@@ -1,5 +1,5 @@
 import axios from 'axios';
-const prod = false;
+const prod = true;
 const configObject = {
 	prod: {
 		url: 'https://bourbon-backend.herokuapp.com/api',
