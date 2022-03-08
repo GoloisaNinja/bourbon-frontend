@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import styles from './UserReview.module.scss';
 
 const UserReview = ({ review }) => {
