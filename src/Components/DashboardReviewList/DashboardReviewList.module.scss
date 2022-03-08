@@ -1,0 +1,47 @@
+@import '../../scss/colors.scss';
+@import '../../scss/mixins.scss';
+
+.review_list {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+	background-color: $dark-blue-accent;
+	color: $teal-color;
+	max-height: 385px;
+	overflow-y: auto;
+	> h1 {
+		color: #eee;
+	}
+	> button {
+		display: flex;
+		justify-content: space-between;
+		border: none;
+		background: none;
+		outline: none;
+		font-family: 'Readex Pro', sans-serif;
+		font-weight: bold;
+		background-color: darken($red-color, 10%);
+		border-bottom: 2px solid darken($red-color, 20%);
+		color: #fff;
+		border-radius: 5px;
+		padding: 8px;
+		text-align: left;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		&:hover {
+			background-color: $red-color;
+		}
+	}
+	> button:not(:last-child) {
+		margin-bottom: 15px;
+	}
+}
+.empty_title {
+	color: #eee;
+}
+.btn_explore {
+	@include gradient-button;
+	@media (min-width: 600px) {
+		max-width: 250px;
+	}
+}

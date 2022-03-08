@@ -7,7 +7,9 @@ const Footer = () => {
 	return (
 		<footer className={styles.footer_container}>
 			<div>
-				<h3>hello bourb(ON)</h3>
+				<h3>
+					hello bourb<span className={styles.pink_span}>(on)</span>
+				</h3>
 				<Link to='/'>Home</Link>
 				<a
 					href='https://github.com/goloisaninja'

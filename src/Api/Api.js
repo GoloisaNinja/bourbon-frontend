@@ -62,6 +62,20 @@ export const getBourbonReviews = async (id) => {
 	}
 };
 
+// Get All Reviews for the Dashboard Reviews Page based on user ID
+
+export const getUserBourbonReviews = async (id) => {
+	try {
+		const response = await axios.get(
+			`${baseURL}/reviews/user/${id}?apiKey=${apikey}`
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
 // Create a review for the Individual Bourbon page
 
 export const postBourbonReview = async (formData) => {

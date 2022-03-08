@@ -9,7 +9,6 @@ import BourbonPageGrid from '../../Components/BourbonPageGrid/BourbonPageGrid';
 import BourbonPageReview from '../../Components/BourbonPageReview/BourbonPageReview';
 import BourbonPageUserReviewSection from '../../Components/BourbonPageUserReviewSection/BourbonPageUserReviewSection';
 import Loading from '../../Components/Loading/Loading';
-import Alert from '../../Components/Alert/Alert';
 import { MdErrorOutline } from 'react-icons/md';
 import styles from './BourbonPage.module.scss';
 
@@ -43,52 +42,46 @@ const BourbonPage = ({
 	return loading ? (
 		<Loading />
 	) : bourbon ? (
-		<>
-			<Alert />
-			<div className={styles.container}>
-				<button onClick={(e) => navigate(-1)}>Go Back</button>
-				<div className={styles.details_wrapper}>
-					<h1 className={styles.title}>{bourbon.title}</h1>
-					<BourbonPagePricing pricingArray={bourbon.price_array} />
+		<div className={styles.container}>
+			<button onClick={(e) => navigate(-1)}>Go Back</button>
+			<div className={styles.details_wrapper}>
+				<h1 className={styles.title}>{bourbon.title}</h1>
+				<BourbonPagePricing pricingArray={bourbon.price_array} />
+			</div>
+			<div className={styles.lower_container}>
+				<div className={styles.score_container}>
+					<p>Score</p>
+					<p>{bourbon.review.score ? bourbon.review.score : '?'}</p>
 				</div>
-				<div className={styles.lower_container}>
-					<div className={styles.score_container}>
-						<p>Score</p>
-						<p>{bourbon.review.score ? bourbon.review.score : '?'}</p>
+				<img
+					src={bourbon.image}
+					alt={`A bottle of ${bourbon.title} or a default whiskey background`}
+				/>
+				<BourbonPageGrid
+					abv={bourbon.abv}
+					age={bourbon.age}
+					bottler={bourbon.bottler}
+					distiller={bourbon.distiller}
+				/>
+				<BourbonPageReview review={bourbon.review} />
+				{reviews_loading ? (
+					<div>
+						<h2>loading...</h2>
 					</div>
-					<img
-						src={bourbon.image}
-						alt={`A bottle of ${bourbon.title} or a default whiskey background`}
-					/>
-					<BourbonPageGrid
-						abv={bourbon.abv}
-						age={bourbon.age}
-						bottler={bourbon.bottler}
-						distiller={bourbon.distiller}
-					/>
-					<BourbonPageReview review={bourbon.review} />
-					{reviews_loading ? (
-						<div>
-							<h2>loading...</h2>
-						</div>
-					) : (
-						<BourbonPageUserReviewSection reviews={reviews} />
-					)}
-				</div>
+				) : (
+					<BourbonPageUserReviewSection reviews={reviews} />
+				)}
 			</div>
-		</>
+		</div>
 	) : (
-		<>
-			<Alert />
-			<div className={styles.not_found}>
-				<button onClick={(e) => navigate(-1)}>Go Back</button>
-				<h1>
-					<MdErrorOutline />
-					Uh oh!
-				</h1>
-				<h2>Bourbon not found...</h2>
-			</div>
-		</>
+		<div className={styles.not_found}>
+			<button onClick={(e) => navigate(-1)}>Go Back</button>
+			<h1>
+				<MdErrorOutline />
+				Uh oh!
+			</h1>
+			<h2>Bourbon not found...</h2>
+		</div>
 	);
 };
 

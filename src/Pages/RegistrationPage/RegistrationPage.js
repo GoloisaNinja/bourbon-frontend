@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RegistrationForm from '../../Components/Auth/RegistrationForm/RegistrationForm';
-import Alert from '../../Components/Alert/Alert';
 import styles from './RegistrationPage.module.scss';
 
 const RegistrationPage = ({ isAuthenticated }) => {
@@ -15,7 +14,6 @@ const RegistrationPage = ({ isAuthenticated }) => {
 	}, [isAuthenticated, navigate]);
 	return (
 		<div>
-			<Alert />
 			<h1 className={styles.title}>Regist(er)</h1>
 			<RegistrationForm />
 		</div>

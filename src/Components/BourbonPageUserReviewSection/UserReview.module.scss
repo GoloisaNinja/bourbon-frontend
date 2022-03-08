@@ -1,9 +1,10 @@
 @import '../../scss/colors.scss';
 
 .user_review {
+	display: flex;
+	flex-direction: column;
 	padding: 15px;
 	margin-bottom: 20px;
-	//background-color: lighten($dark-blue-accent, 1%);
 	background-color: $dark-blue-accent;
 	border-radius: 5px;
 	border: 1px solid $pink-color;
@@ -38,7 +39,8 @@
 			color: darken($pink-color, 20%);
 		}
 	}
-	> div:last-child {
-		margin-top: 25px;
-	}
+}
+.review_text {
+	margin-top: 25px;
+	flex: 1;
 }

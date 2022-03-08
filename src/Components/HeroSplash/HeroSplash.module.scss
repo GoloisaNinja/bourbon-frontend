@@ -1,0 +1,31 @@
+@import '../../scss/mixins.scss';
+$dash-bg: url('../../images/dashboard.webp');
+$bourbon-bg: url('../../images/landing.webp');
+$reviews-bg: url('../../images/reviews.webp');
+
+@include hero_splash;
+
+.home {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4/3;
+	background: $bourbon-bg;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.dash {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4/3;
+	background: $dash-bg;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.reviews {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4/3;
+	background: $reviews-bg;
+	background-size: cover;
+	background-repeat: no-repeat;
+}

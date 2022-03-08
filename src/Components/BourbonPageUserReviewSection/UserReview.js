@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import styles from './UserReview.module.scss';
 
 const UserReview = ({ review }) => {
@@ -19,7 +21,7 @@ const UserReview = ({ review }) => {
 				</div>
 				<p>{review.reviewScore}</p>
 			</div>
-			<div>{review.reviewText}</div>
+			<div className={styles.review_text}>{review.reviewText}</div>
 		</div>
 	);
 };

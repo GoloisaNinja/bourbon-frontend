@@ -43,7 +43,7 @@ const DashboardGrid = () => {
 			title: `All your Reviews in one spot!`,
 			content: `Manage and edit the reviews you've posted to various bourbons across the site from here.`,
 			btnObj: {
-				path: `/`,
+				path: `reviews`,
 				text: `Your Reviews`,
 			},
 		},
