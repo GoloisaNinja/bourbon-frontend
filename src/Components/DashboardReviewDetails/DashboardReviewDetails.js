@@ -13,7 +13,7 @@ const DashBoardReviewDetails = ({ review }) => {
 							<p>
 								<Link
 									className={styles.bourbon_link}
-									to={`/bourbons/${review._id}`}>
+									to={`/bourbons/${review.bourbon_id}`}>
 									{review.bourbonName}
 								</Link>
 							</p>
