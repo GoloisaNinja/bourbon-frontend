@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './DashboardReviewDetails.module.scss';
 
 const DashBoardReviewDetails = ({ review }) => {
@@ -9,7 +10,13 @@ const DashBoardReviewDetails = ({ review }) => {
 					<div>
 						<div className={styles.details_upper_card}>
 							<p>Bourbon</p>
-							<p>{review.bourbonName}</p>
+							<p>
+								<Link
+									className={styles.bourbon_link}
+									to={`/bourbons/${review._id}`}>
+									{review.bourbonName}
+								</Link>
+							</p>
 						</div>
 						<div className={styles.details_upper_card}>
 							<p>Title</p>
