@@ -23,7 +23,7 @@ const DashboardGrid = () => {
 			title: `Visit all your Collections!`,
 			content: `Create and manage your collections here.`,
 			btnObj: {
-				path: `/`,
+				path: `/collections`,
 				text: `Your Collections`,
 			},
 		},
@@ -43,7 +43,7 @@ const DashboardGrid = () => {
 			title: `All your Reviews in one spot!`,
 			content: `Manage and edit the reviews you've posted to various bourbons across the site from here.`,
 			btnObj: {
-				path: `reviews`,
+				path: `/reviews`,
 				text: `Your Reviews`,
 			},
 		},

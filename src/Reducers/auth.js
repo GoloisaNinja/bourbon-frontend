@@ -11,7 +11,7 @@ import {
 } from '../Actions/types';
 
 const initialState = {
-	loading: true,
+	loading: false,
 	isAuthenticated: false,
 	user: {},
 	token: '',

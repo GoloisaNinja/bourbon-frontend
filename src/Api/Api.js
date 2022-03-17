@@ -101,6 +101,92 @@ export const postBourbonReview = async (formData) => {
 	}
 };
 
+// Edit a review from the User's Dashboard Reviews page
+
+export const editUserReview = async (id, formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.patch(
+			`${baseURL}/review/update/${id}?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		return error.response;
+	}
+};
+
+// Delete a review from the User's Dashboard Reviews Page
+
+export const deleteUserReview = async (id) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.delete(
+			`${baseURL}/review/${id}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		return error.response;
+	}
+};
+
+// Collection Calls
+
+export const getUserCollections = async () => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.get(
+			`${baseURL}/collections?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+export const getUserCollectionById = async (id) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.get(
+			`${baseURL}/collection/${id}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
 // User Auth Calls
 
 export const loginUser = async (email, password) => {

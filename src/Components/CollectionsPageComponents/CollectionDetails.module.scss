@@ -1,0 +1,75 @@
+@import '../../scss/colors.scss';
+@import '../../scss/mixins.scss';
+
+.container {
+	background-color: $dark-blue-accent;
+	color: #eee;
+	padding: 15px;
+	max-height: 500px;
+	overflow-y: auto;
+	border-radius: 5px;
+	> div:first-child {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		> p {
+			background-color: #fff;
+			color: $dark-blue-accent;
+			padding: 10px 15px;
+			border-radius: 50%;
+			font-weight: bold;
+		}
+	}
+}
+.details_container {
+	> a:first-child {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: none;
+		border: none;
+		background-color: darken($purple-color, 5%);
+		border-bottom: 2px solid darken($purple-color, 10%);
+		border-radius: 5px;
+		padding: 12px;
+		color: #eee;
+		font-family: 'Readex Pro', sans-serif;
+		font-size: 13.333px;
+		font-weight: 900;
+		cursor: pointer;
+		text-decoration: none;
+		transition: all 0.4s ease-in-out;
+		&:hover {
+			background-color: $purple-color;
+		}
+	}
+	> div:nth-child(2) {
+		> ul {
+			list-style: none;
+			padding: 0;
+			> li:not(:last-child) {
+				margin-bottom: 15px;
+			}
+			> li {
+				> a {
+					text-decoration: none;
+					color: $teal-color;
+					font-weight: 500;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+.empty_container {
+	> p {
+		margin-top: 0;
+		margin-bottom: 50px;
+	}
+	> a:last-child {
+		display: inline-block;
+		text-decoration: none;
+		@include gradient-button;
+		text-align: center;
+	}
+}

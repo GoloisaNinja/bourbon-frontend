@@ -7,8 +7,10 @@ import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 import BourbonsPage from '../Pages/BourbonsPage/BourbonsPage';
 import BourbonPage from '../Pages/BourbonPage/BourbonPage';
-import DashboardPage from '../Pages/Dashboard/DashboardPage';
-import DashboardReviewsPage from '../Pages/Dashboard/DashboardReviewsPage';
+import DashboardPage from '../Pages/DashboardPage/DashboardPage';
+import ReviewsPage from '../Pages/ReviewsPage/ReviewsPage';
+import CollectionsPage from '../Pages/CollectionsPage/CollectionsPage';
+import CollectionPage from '../Pages/CollectionPage/CollectionPage';
 import PrivateRoute from '../Components/Routing/PrivateRoute';
 
 import { Provider } from 'react-redux';
@@ -28,9 +30,17 @@ const AppRouter = () => {
 					<Route path='/bourbons/:bourbonId' element={<BourbonPage />} />
 					<Route path='/dashboard' element={<PrivateRoute />}>
 						<Route path='/dashboard' element={<DashboardPage />} />
+					</Route>
+					<Route path='/reviews' element={<PrivateRoute />}>
+						<Route path='/reviews' element={<ReviewsPage />} />
+					</Route>
+					<Route path='/collections' element={<PrivateRoute />}>
+						<Route path='/collections' element={<CollectionsPage />} />
+					</Route>
+					<Route path='/collections/:collectionId' element={<PrivateRoute />}>
 						<Route
-							path='/dashboard/reviews'
-							element={<DashboardReviewsPage />}
+							path='/collections/:collectionId'
+							element={<CollectionPage />}
 						/>
 					</Route>
 				</Routes>

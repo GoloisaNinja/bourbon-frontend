@@ -34,8 +34,11 @@ const Footer = () => {
 						built by GoloisaNinja
 					</a>
 				</h3>
-				<a href='https://jcodes.page' rel='noreferrer' target='_blank'>
+				<a href='https://joncollins.dev' rel='noreferrer' target='_blank'>
 					My Portfolio
+				</a>
+				<a href='https://jcodes.blog' rel='noreferrer' target='_blank'>
+					My Blog
 				</a>
 			</div>
 		</footer>

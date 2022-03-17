@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import LoginForm from '../../Components/Auth/LoginForm/LoginForm';
+import ScrollToTop from '../../Components/ScrollToTop/ScrollToTop';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -14,6 +15,7 @@ const LoginPage = ({ isAuthenticated }) => {
 	}, [isAuthenticated, navigate]);
 	return (
 		<div>
+			<ScrollToTop />
 			<h1 className={styles.title}>Log(IN)</h1>
 			<LoginForm />
 		</div>

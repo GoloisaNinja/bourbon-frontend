@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getSingleBourbon, cleanUpBourbon } from '../../Actions/bourbon';
 import { getBourbonReviews } from '../../Actions/review';
-import BourbonPagePricing from '../../Components/BourbonPagePricing/BourbonPagePricing';
-import BourbonPageGrid from '../../Components/BourbonPageGrid/BourbonPageGrid';
-import BourbonPageReview from '../../Components/BourbonPageReview/BourbonPageReview';
-import BourbonPageUserReviewSection from '../../Components/BourbonPageUserReviewSection/BourbonPageUserReviewSection';
+import BourbonPricing from '../../Components/BourbonPageComponents/BourbonPricing/BourbonPricing';
+import BourbonDetails from '../../Components/BourbonPageComponents/BourbonDetails/BourbonDetails';
+import UpperReview from '../../Components/BourbonPageComponents/UpperReview/UpperReview';
+import ReviewSection from '../../Components/BourbonPageComponents/BourbonBottomReview/ReviewSection/ReviewSection';
 import Loading from '../../Components/Loading/Loading';
 import { MdErrorOutline } from 'react-icons/md';
 import styles from './BourbonPage.module.scss';
@@ -46,7 +46,7 @@ const BourbonPage = ({
 			<button onClick={(e) => navigate(-1)}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>
-				<BourbonPagePricing pricingArray={bourbon.price_array} />
+				<BourbonPricing pricingArray={bourbon.price_array} />
 			</div>
 			<div className={styles.lower_container}>
 				<div className={styles.score_container}>
@@ -57,19 +57,19 @@ const BourbonPage = ({
 					src={bourbon.image}
 					alt={`A bottle of ${bourbon.title} or a default whiskey background`}
 				/>
-				<BourbonPageGrid
+				<BourbonDetails
 					abv={bourbon.abv}
 					age={bourbon.age}
 					bottler={bourbon.bottler}
 					distiller={bourbon.distiller}
 				/>
-				<BourbonPageReview review={bourbon.review} />
+				<UpperReview review={bourbon.review} />
 				{reviews_loading ? (
 					<div>
 						<h2>loading...</h2>
 					</div>
 				) : (
-					<BourbonPageUserReviewSection reviews={reviews} />
+					<ReviewSection reviews={reviews} />
 				)}
 			</div>
 		</div>

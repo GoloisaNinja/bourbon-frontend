@@ -4,6 +4,7 @@ import auth from './auth';
 import bourbons from './bourbons';
 import bourbon from './bourbon';
 import reviews from './reviews';
+import collections from './collections';
 
 export default combineReducers({
 	alert,
@@ -11,4 +12,5 @@ export default combineReducers({
 	bourbons,
 	bourbon,
 	reviews,
+	collections,
 });
