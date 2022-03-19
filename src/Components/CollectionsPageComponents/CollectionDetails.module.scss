@@ -12,50 +12,90 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		> p {
+		> div:nth-child(2) {
+			display: flex;
+			min-width: 70px;
+			> svg {
+				font-size: 35px;
+				color: #eee;
+				background-color: $red-color;
+				border-radius: 50%;
+				padding: 5px;
+				cursor: pointer;
+			}
+			> svg:first-child {
+				background-color: darken($blue-color, 15%);
+				margin-right: 10px;
+			}
+		}
+	}
+}
+.details_container {
+	> div:first-child {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		> a:last-child {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: none;
+			border: none;
+			background-color: darken($purple-color, 5%);
+			border-bottom: 2px solid darken($purple-color, 10%);
+			border-radius: 5px;
+			padding: 12px;
+			margin-left: 20px;
+			width: 100%;
+			color: #eee;
+			font-family: 'Readex Pro', sans-serif;
+			font-size: 13.333px;
+			font-weight: 900;
+			cursor: pointer;
+			text-decoration: none;
+			transition: all 0.4s ease-in-out;
+			&:hover {
+				background-color: $purple-color;
+			}
+		}
+		> p:first-child {
 			background-color: #fff;
 			color: $dark-blue-accent;
 			padding: 10px 15px;
 			border-radius: 50%;
 			font-weight: bold;
+			margin: 0;
 		}
 	}
-}
-.details_container {
-	> a:first-child {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background: none;
-		border: none;
-		background-color: darken($purple-color, 5%);
-		border-bottom: 2px solid darken($purple-color, 10%);
-		border-radius: 5px;
-		padding: 12px;
-		color: #eee;
-		font-family: 'Readex Pro', sans-serif;
-		font-size: 13.333px;
-		font-weight: 900;
-		cursor: pointer;
-		text-decoration: none;
-		transition: all 0.4s ease-in-out;
-		&:hover {
-			background-color: $purple-color;
-		}
-	}
+
 	> div:nth-child(2) {
+		> h3 {
+			border-bottom: 1px solid #eee;
+		}
 		> ul {
 			list-style: none;
 			padding: 0;
 			> li:not(:last-child) {
-				margin-bottom: 15px;
+				margin-bottom: 20px;
 			}
 			> li {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				> svg {
+					background-color: $red-color;
+					color: #fff;
+					border-radius: 50%;
+					padding: 5px;
+					font-size: 28px;
+				}
 				> a {
 					text-decoration: none;
 					color: $teal-color;
 					font-weight: 500;
 					cursor: pointer;
+					max-width: 70%;
 				}
 			}
 		}

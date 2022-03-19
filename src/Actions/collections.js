@@ -5,11 +5,17 @@ import {
 	CLEANUP_QUICKLOOK,
 	GET_USER_COLLECTION_SUCCESS,
 	GET_USER_COLLECTION_FAILURE,
+	EDIT_COLLECTION_SUCCESS,
+	EDIT_COLLECTION_FAILURE,
+	DELETE_COLLECTION_SUCCESS,
+	DELETE_COLLECTION_FAILURE,
 	CLEANUP_COLLECTION,
 } from './types';
 import {
 	getUserCollections as getCollections,
 	getUserCollectionById as getCollection,
+	editUserCollection as editCollection,
+	deleteUserCollection as deleteCollection,
 } from '../Api/Api';
 import { setAlert } from './alert';
 
@@ -38,6 +44,38 @@ export const getUserCollectionById = (id) => async (dispatch) => {
 	} else {
 		dispatch({
 			type: GET_USER_COLLECTION_FAILURE,
+		});
+		dispatch(setAlert(response.data.message, 'danger'));
+	}
+};
+
+export const editUserCollection = (id, formData) => async (dispatch) => {
+	const response = await editCollection(id, formData);
+	if (response.status === 200) {
+		dispatch({
+			type: EDIT_COLLECTION_SUCCESS,
+			payload: response.data,
+		});
+		dispatch(setAlert('Collection updated!', 'success'));
+	} else {
+		dispatch({
+			type: EDIT_COLLECTION_FAILURE,
+		});
+		dispatch(setAlert(response.data.message, 'danger'));
+	}
+};
+
+export const deleteUserCollection = (id) => async (dispatch) => {
+	const response = await deleteCollection(id);
+	if (response.status === 200) {
+		dispatch({
+			type: DELETE_COLLECTION_SUCCESS,
+			payload: id,
+		});
+		dispatch(setAlert('Deleted Collection!', 'success'));
+	} else {
+		dispatch({
+			type: DELETE_COLLECTION_FAILURE,
 		});
 		dispatch(setAlert(response.data.message, 'danger'));
 	}

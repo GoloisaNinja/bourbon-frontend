@@ -55,7 +55,13 @@ const ReviewDetails = ({ review }) => {
 							contents={{
 								component: ConfirmCancel,
 								handleModal: handleModal,
-								details: { review: review },
+								details: {
+									content: {
+										type: 'Review',
+										id: review._id,
+										name: review.bourbonName,
+									},
+								},
 							}}
 						/>
 					)}

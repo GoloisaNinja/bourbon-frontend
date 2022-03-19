@@ -147,6 +147,7 @@ export const deleteUserReview = async (id) => {
 
 // Collection Calls
 
+// Get all Collections based on authenticated user
 export const getUserCollections = async () => {
 	const token = localStorage.getItem('token');
 	const config = {
@@ -167,6 +168,7 @@ export const getUserCollections = async () => {
 	}
 };
 
+// Get single collection for auth user with collection id
 export const getUserCollectionById = async (id) => {
 	const token = localStorage.getItem('token');
 	const config = {
@@ -177,6 +179,49 @@ export const getUserCollectionById = async (id) => {
 	};
 	try {
 		const response = await axios.get(
+			`${baseURL}/collection/${id}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Edit a Collection Name and possibly the privacy flag
+export const editUserCollection = async (id, formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.patch(
+			`${baseURL}/collection/update/${id}?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+export const deleteUserCollection = async (id) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.delete(
 			`${baseURL}/collection/${id}?apiKey=${apikey}`,
 			config
 		);

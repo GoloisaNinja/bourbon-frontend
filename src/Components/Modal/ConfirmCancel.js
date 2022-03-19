@@ -1,24 +1,38 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteUserReview } from '../../Actions/review';
+import { deleteUserCollection } from '../../Actions/collections';
 import styles from './ConfirmCancel.module.scss';
 
-const ConfirmCancel = ({ handleModal, details, deleteUserReview }) => {
-	const { review } = details;
+const ConfirmCancel = ({
+	handleModal,
+	details,
+	deleteUserReview,
+	deleteUserCollection,
+}) => {
+	const { content } = details;
 	const handleClick = (e) => {
 		if (e.target.value === 'cancel') {
 			handleModal();
 		} else {
-			deleteUserReview(review._id);
+			if (content.type === 'Review') {
+				deleteUserReview(content.id);
+			} else if (content.type === 'Collection') {
+				deleteUserCollection(content.id);
+			} else {
+				//deleteUserWishlist(content.id)
+				console.log('wishlist here');
+			}
 			handleModal();
 		}
 	};
 	return (
 		<div className={styles.container}>
-			<h1>Delete Review</h1>
+			<h1>{`Delete ${content.type}`}</h1>
 			<h4>
 				Just checking! You really want to delete your{' '}
-				<span>{review.bourbonName}</span> review?
+				<span>{content.name}</span>
+				{` ${content.type.toLowerCase()}?`}
 			</h4>
 			<div>
 				<button value='confirm' onClick={(e) => handleClick(e)}>
@@ -33,5 +47,8 @@ const ConfirmCancel = ({ handleModal, details, deleteUserReview }) => {
 };
 ConfirmCancel.propTypes = {
 	deleteUserReview: PropTypes.func.isRequired,
+	deleteUserCollection: PropTypes.func.isRequired,
 };
-export default connect(null, { deleteUserReview })(ConfirmCancel);
+export default connect(null, { deleteUserReview, deleteUserCollection })(
+	ConfirmCancel
+);

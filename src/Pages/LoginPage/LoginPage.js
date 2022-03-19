@@ -16,7 +16,7 @@ const LoginPage = ({ isAuthenticated }) => {
 	return (
 		<div>
 			<ScrollToTop />
-			<h1 className={styles.title}>Log(IN)</h1>
+			<h1 className={styles.title}>Log(in)</h1>
 			<LoginForm />
 		</div>
 	);
