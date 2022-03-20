@@ -9,14 +9,14 @@ import smoothscroll from 'smoothscroll-polyfill';
 import styles from './CollectionForm.module.scss';
 
 const CollectionForm = ({
-	collection: { name, _id },
+	collection,
 	handleModal,
 	editUserCollection,
 	postUserCollection,
 	details,
 }) => {
 	const [collectionName, setCollectionName] = useState(
-		details.isEdit ? name : ''
+		details.isEdit ? collection.name : ''
 	);
 	const handleChange = (e) => {
 		setCollectionName(e.target.value);
@@ -31,7 +31,7 @@ const CollectionForm = ({
 			isPrivate: true,
 		};
 		if (details.isEdit) {
-			editUserCollection(_id, editObj);
+			editUserCollection(collection._id, editObj);
 		} else {
 			postUserCollection(editObj);
 		}
