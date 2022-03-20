@@ -5,19 +5,41 @@ import {
 	CLEANUP_QUICKLOOK,
 	GET_USER_COLLECTION_SUCCESS,
 	GET_USER_COLLECTION_FAILURE,
+	CREATE_COLLECTION_SUCCESS,
+	CREATE_COLLECTION_FAILURE,
 	EDIT_COLLECTION_SUCCESS,
 	EDIT_COLLECTION_FAILURE,
 	DELETE_COLLECTION_SUCCESS,
 	DELETE_COLLECTION_FAILURE,
+	DELETE_BOURBON_FROM_COLLECTION_SUCCESS,
+	DELETE_BOURBON_FROM_COLLECTION_FAILURE,
 	CLEANUP_COLLECTION,
 } from './types';
 import {
+	postUserCollection as postCollection,
 	getUserCollections as getCollections,
 	getUserCollectionById as getCollection,
 	editUserCollection as editCollection,
 	deleteUserCollection as deleteCollection,
+	deleteBourbonFromUserCollection as deleteBourbon,
 } from '../Api/Api';
 import { setAlert } from './alert';
+
+export const postUserCollection = (name) => async (dispatch) => {
+	const response = await postCollection(name);
+	if (response.status === 201) {
+		dispatch({
+			type: CREATE_COLLECTION_SUCCESS,
+			payload: response.data,
+		});
+		dispatch(setAlert('Collection Created!', 'success'));
+	} else {
+		dispatch({
+			type: CREATE_COLLECTION_FAILURE,
+		});
+		dispatch(setAlert(response.data.message, 'danger'));
+	}
+};
 
 export const getUserCollections = () => async (dispatch) => {
 	const response = await getCollections();
@@ -64,6 +86,23 @@ export const editUserCollection = (id, formData) => async (dispatch) => {
 		dispatch(setAlert(response.data.message, 'danger'));
 	}
 };
+
+export const deleteBourbonFromUserCollection =
+	(collectionId, bourbonId) => async (dispatch) => {
+		const response = await deleteBourbon(collectionId, bourbonId);
+		if (response.status === 200) {
+			dispatch({
+				type: DELETE_BOURBON_FROM_COLLECTION_SUCCESS,
+				payload: { collectionId, bourbonId, collection: response.data },
+			});
+			dispatch(setAlert('Deleted Bourbon!', 'success'));
+		} else {
+			dispatch({
+				type: DELETE_BOURBON_FROM_COLLECTION_FAILURE,
+			});
+			dispatch(setAlert(response.data.message, 'danger'));
+		}
+	};
 
 export const deleteUserCollection = (id) => async (dispatch) => {
 	const response = await deleteCollection(id);

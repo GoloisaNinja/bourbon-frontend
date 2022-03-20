@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import CollectionForm from './CollectionForm';
@@ -10,11 +11,20 @@ import styles from './CollectionDetails.module.scss';
 const CollectionDetails = ({ collection }) => {
 	const [show, setShow] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
+	const [showDelete, setShowDelete] = useState(false);
+	const [bourbonToDelete, setBourbonToDelete] = useState({});
 	const handleModal = () => {
 		setShow(!show);
 	};
 	const handleEditModal = () => {
 		setShowEdit(!showEdit);
+	};
+	const handleDeleteBourbonModal = () => {
+		setShowDelete(!showDelete);
+	};
+	const handleDeleteBourbon = (id, title) => {
+		setBourbonToDelete({ id, title });
+		handleDeleteBourbonModal();
 	};
 	const scrollToTop = () => {
 		smoothscroll.polyfill();
@@ -34,7 +44,9 @@ const CollectionDetails = ({ collection }) => {
 					{collection.bourbons.length > 0 ? (
 						<div className={styles.details_container}>
 							<div>
-								<p>{collection.bourbons.length}</p>
+								<div>
+									<p>{collection.bourbons.length}</p>
+								</div>
 								<Link
 									to={`/collections/${collection._id}`}
 									onClick={() => scrollToTop()}>
@@ -46,10 +58,14 @@ const CollectionDetails = ({ collection }) => {
 								<ul>
 									{collection.bourbons.map((bourbon) => (
 										<li key={bourbon._id}>
-											<Link to={`/bourbons/${bourbon.bourbon_id}`}>
+											<Link to={`/bourbons/${bourbon._id}`}>
 												{bourbon.title}
 											</Link>
-											<HiOutlineTrash />
+											<HiOutlineTrash
+												onClick={() =>
+													handleDeleteBourbon(bourbon._id, bourbon.title)
+												}
+											/>
 										</li>
 									))}
 								</ul>
@@ -86,10 +102,30 @@ const CollectionDetails = ({ collection }) => {
 			)}
 			{showEdit && (
 				<Modal
-					contents={{ component: CollectionForm, handleModal: handleEditModal }}
+					contents={{
+						component: CollectionForm,
+						handleModal: handleEditModal,
+						details: { isEdit: true },
+					}}
+				/>
+			)}
+			{showDelete && (
+				<Modal
+					contents={{
+						component: ConfirmCancel,
+						handleModal: handleDeleteBourbonModal,
+						details: {
+							content: {
+								type: 'Bourbon',
+								id: bourbonToDelete.id,
+								name: bourbonToDelete.title,
+							},
+						},
+					}}
 				/>
 			)}
 		</div>
 	);
 };
+
 export default CollectionDetails;

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { editUserCollection } from '../../Actions/collections';
+import {
+	editUserCollection,
+	postUserCollection,
+} from '../../Actions/collections';
 import smoothscroll from 'smoothscroll-polyfill';
 import styles from './CollectionForm.module.scss';
 
@@ -9,8 +12,12 @@ const CollectionForm = ({
 	collection: { name, _id },
 	handleModal,
 	editUserCollection,
+	postUserCollection,
+	details,
 }) => {
-	const [collectionName, setCollectionName] = useState(name);
+	const [collectionName, setCollectionName] = useState(
+		details.isEdit ? name : ''
+	);
 	const handleChange = (e) => {
 		setCollectionName(e.target.value);
 	};
@@ -20,17 +27,21 @@ const CollectionForm = ({
 		smoothscroll.polyfill();
 		const cleanCollectionName = collectionName.trim();
 		const editObj = {
-			collectionName: cleanCollectionName,
+			name: cleanCollectionName,
 			isPrivate: true,
 		};
-		editUserCollection(_id, editObj);
+		if (details.isEdit) {
+			editUserCollection(_id, editObj);
+		} else {
+			postUserCollection(editObj);
+		}
 		handleModal();
 		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	};
 
 	return (
 		<div className={styles.form_container}>
-			<h1>Edit Collection</h1>
+			<h1>{details.isEdit ? 'Edit Collection' : 'Create Collection'}</h1>
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<label>Collection Name</label>
 				<input
@@ -42,7 +53,9 @@ const CollectionForm = ({
 					onChange={(e) => handleChange(e)}
 				/>
 				<div className={styles.title_chars}>{50 - collectionName.length}</div>
-				<button type='submit'>submit edit</button>
+				<button type='submit'>
+					{details.isEdit ? 'submit edit' : 'submit'}
+				</button>
 			</form>
 		</div>
 	);
@@ -50,8 +63,12 @@ const CollectionForm = ({
 CollectionForm.propTypes = {
 	collection: PropTypes.object,
 	editUserCollection: PropTypes.func.isRequired,
+	postUserCollection: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
 	collection: state.collections.quick_look,
 });
-export default connect(mapStateToProps, { editUserCollection })(CollectionForm);
+export default connect(mapStateToProps, {
+	editUserCollection,
+	postUserCollection,
+})(CollectionForm);

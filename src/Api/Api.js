@@ -147,6 +147,29 @@ export const deleteUserReview = async (id) => {
 
 // Collection Calls
 
+// Create a new user Collection
+export const postUserCollection = async (formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.post(
+			`${baseURL}/collection?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
 // Get all Collections based on authenticated user
 export const getUserCollections = async () => {
 	const token = localStorage.getItem('token');
@@ -212,6 +235,31 @@ export const editUserCollection = async (id, formData) => {
 	}
 };
 
+// Delete a bourbon from user collection based on auth, collection ID and bourbon ID
+export const deleteBourbonFromUserCollection = async (
+	collectionId,
+	bourbonId
+) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-typd': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.delete(
+			`${baseURL}/collection/delete/${collectionId}/${bourbonId}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Delete an entire user collection based on user auth and collection ID
 export const deleteUserCollection = async (id) => {
 	const token = localStorage.getItem('token');
 	const config = {

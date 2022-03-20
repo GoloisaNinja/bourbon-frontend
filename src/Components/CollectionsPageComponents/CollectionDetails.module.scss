@@ -35,6 +35,21 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		> div:first-child {
+			width: 40px;
+			> p:first-child {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #fff;
+				color: $dark-blue-accent;
+				padding: 10px 10px;
+				border-radius: 50%;
+				font-weight: bold;
+				margin: 0;
+				width: 40px;
+			}
+		}
 
 		> a:last-child {
 			display: flex;
@@ -59,14 +74,6 @@
 				background-color: $purple-color;
 			}
 		}
-		> p:first-child {
-			background-color: #fff;
-			color: $dark-blue-accent;
-			padding: 10px 15px;
-			border-radius: 50%;
-			font-weight: bold;
-			margin: 0;
-		}
 	}
 
 	> div:nth-child(2) {
@@ -89,6 +96,7 @@
 					border-radius: 50%;
 					padding: 5px;
 					font-size: 28px;
+					cursor: pointer;
 				}
 				> a {
 					text-decoration: none;

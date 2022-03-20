@@ -81,11 +81,14 @@
 	}
 
 	> p:last-child {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		font-size: 25px;
 		font-weight: bold;
 		background-color: #eee;
 		border-radius: 50%;
-		padding: 8px 15px;
+		padding: 8px 10px;
 		width: 50px;
 		color: $dark-blue-accent;
 		margin: 0 auto;

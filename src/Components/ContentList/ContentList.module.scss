@@ -10,9 +10,27 @@
 	max-height: 500px;
 	overflow-y: auto;
 	border-radius: 5px;
-	> h1 {
-		color: #eee;
+	> div:first-child {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		> h1 {
+			color: #eee;
+		}
+		> div:last-child {
+			width: 35px;
+			> svg {
+				font-size: 35px;
+				color: $dark-blue-accent;
+				background-color: #eee;
+				border-radius: 50%;
+				padding: 5px;
+				cursor: pointer;
+				width: 35px;
+			}
+		}
 	}
+
 	> button {
 		display: flex;
 		justify-content: space-between;
