@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getSingleBourbon, cleanUpBourbon } from '../../Actions/bourbon';
 import { getBourbonReviews } from '../../Actions/review';
+import Modal from '../../Components/Modal/Modal';
+import AddBourbonForm from '../../Components/AddBourbonForm/AddBourbonForm';
 import BourbonPricing from '../../Components/BourbonPageComponents/BourbonPricing/BourbonPricing';
 import BourbonDetails from '../../Components/BourbonPageComponents/BourbonDetails/BourbonDetails';
 import UpperReview from '../../Components/BourbonPageComponents/UpperReview/UpperReview';
 import ReviewSection from '../../Components/BourbonPageComponents/BourbonBottomReview/ReviewSection/ReviewSection';
 import Loading from '../../Components/Loading/Loading';
-import { MdErrorOutline } from 'react-icons/md';
+import {
+	MdErrorOutline,
+	MdOutlineCollectionsBookmark,
+	MdStarBorder,
+} from 'react-icons/md';
 import styles from './BourbonPage.module.scss';
 
 const BourbonPage = ({
@@ -20,10 +26,12 @@ const BourbonPage = ({
 	reviews_loading,
 	reviews,
 	getBourbonReviews,
+	auth,
 }) => {
 	const params = useParams();
 	const navigate = useNavigate();
 	const bourbonId = params.bourbonId;
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
@@ -39,6 +47,10 @@ const BourbonPage = ({
 		return () => cleanUpBourbon();
 	}, [bourbonId, getSingleBourbon, getBourbonReviews, cleanUpBourbon]);
 
+	const handleModal = () => {
+		setShow(!show);
+	};
+
 	return loading ? (
 		<Loading />
 	) : bourbon ? (
@@ -46,6 +58,13 @@ const BourbonPage = ({
 			<button onClick={(e) => navigate(-1)}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>
+				{auth.isAuthenticated && (
+					<span className={styles.actions_group}>
+						<MdOutlineCollectionsBookmark onClick={() => handleModal()} />
+						<MdStarBorder />
+					</span>
+				)}
+
 				<BourbonPricing pricingArray={bourbon.price_array} />
 			</div>
 			<div className={styles.lower_container}>
@@ -72,6 +91,11 @@ const BourbonPage = ({
 					<ReviewSection reviews={reviews} />
 				)}
 			</div>
+			{show && (
+				<Modal
+					contents={{ component: AddBourbonForm, handleModal: handleModal }}
+				/>
+			)}
 		</div>
 	) : (
 		<div className={styles.not_found}>
@@ -92,6 +116,7 @@ BourbonPage.propTypes = {
 	cleanUpBourbon: PropTypes.func.isRequired,
 	reviews_loading: PropTypes.bool.isRequired,
 	reviews: PropTypes.array.isRequired,
+	auth: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -99,6 +124,7 @@ const mapStateToProps = (state) => ({
 	bourbon: state.bourbon.bourbon,
 	reviews_loading: state.bourbon.user_reviews.loading,
 	reviews: state.bourbon.user_reviews.reviews,
+	auth: state.auth,
 });
 export default connect(mapStateToProps, {
 	getSingleBourbon,

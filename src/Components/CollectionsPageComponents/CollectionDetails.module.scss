@@ -75,6 +75,11 @@
 			}
 		}
 	}
+	.disabled {
+		pointer-events: none;
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
 
 	> div:nth-child(2) {
 		> h3 {
@@ -109,15 +114,10 @@
 		}
 	}
 }
-.empty_container {
-	> p {
-		margin-top: 0;
-		margin-bottom: 50px;
-	}
-	> a:last-child {
-		display: inline-block;
-		text-decoration: none;
-		@include gradient-button;
-		text-align: center;
-	}
+.btn_explore {
+	display: inline-block;
+	text-decoration: none;
+	@include gradient-button;
+	text-align: center;
+	margin-top: 15px;
 }

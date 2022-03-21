@@ -16,7 +16,6 @@ const ConfirmCancel = ({
 	collection,
 }) => {
 	const { content } = details;
-	console.log(content);
 	const handleClick = (e) => {
 		if (e.target.value === 'cancel') {
 			handleModal();

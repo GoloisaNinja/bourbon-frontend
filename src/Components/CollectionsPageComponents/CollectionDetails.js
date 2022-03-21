@@ -41,20 +41,25 @@ const CollectionDetails = ({ collection }) => {
 							<HiOutlineTrash onClick={() => handleModal()} />
 						</div>
 					</div>
-					{collection.bourbons.length > 0 ? (
-						<div className={styles.details_container}>
+					<div className={styles.details_container}>
+						<div>
 							<div>
-								<div>
-									<p>{collection.bourbons.length}</p>
-								</div>
-								<Link
-									to={`/collections/${collection._id}`}
-									onClick={() => scrollToTop()}>
-									Go To Collection
-								</Link>
+								<p>{collection.bourbons.length}</p>
 							</div>
-							<div>
-								<h3>{collection.name}</h3>
+							<Link
+								className={
+									collection.bourbons.length > 0
+										? styles.active
+										: styles.disabled
+								}
+								to={`/collections/${collection._id}`}
+								onClick={() => scrollToTop()}>
+								Go To Collection
+							</Link>
+						</div>
+						<div>
+							<h3>{collection.name}</h3>
+							{collection.bourbons.length > 0 ? (
 								<ul>
 									{collection.bourbons.map((bourbon) => (
 										<li key={bourbon._id}>
@@ -69,16 +74,19 @@ const CollectionDetails = ({ collection }) => {
 										</li>
 									))}
 								</ul>
-							</div>
+							) : (
+								<>
+									<p>Collection is empty! Go add some bourbons!</p>
+									<Link
+										className={styles.btn_explore}
+										onClick={() => scrollToTop()}
+										to={`/bourbons`}>
+										Go Explore!
+									</Link>
+								</>
+							)}
 						</div>
-					) : (
-						<div className={styles.empty_container}>
-							<p>Collection is empty! Go add some bourbons!</p>
-							<Link onClick={() => scrollToTop()} to={`/bourbons`}>
-								Go Explore!
-							</Link>
-						</div>
-					)}
+					</div>
 				</>
 			) : (
 				<div>

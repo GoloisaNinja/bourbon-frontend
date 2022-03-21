@@ -5,6 +5,7 @@ import {
 	CLEANUP_QUICKLOOK,
 	GET_USER_COLLECTION_SUCCESS,
 	GET_USER_COLLECTION_FAILURE,
+	UPDATE_USER_COLLECTIONS,
 	CREATE_COLLECTION_SUCCESS,
 	CREATE_COLLECTION_FAILURE,
 	EDIT_COLLECTION_SUCCESS,
@@ -21,6 +22,7 @@ import {
 	getUserCollectionById as getCollection,
 	editUserCollection as editCollection,
 	deleteUserCollection as deleteCollection,
+	addBourbonToUserCollection as addBourbon,
 	deleteBourbonFromUserCollection as deleteBourbon,
 } from '../Api/Api';
 import { setAlert } from './alert';
@@ -30,7 +32,11 @@ export const postUserCollection = (name) => async (dispatch) => {
 	if (response.status === 201) {
 		dispatch({
 			type: CREATE_COLLECTION_SUCCESS,
-			payload: response.data,
+			payload: response.data.collection,
+		});
+		dispatch({
+			type: UPDATE_USER_COLLECTIONS,
+			payload: response.data.user_collections,
 		});
 		dispatch(setAlert('Collection Created!', 'success'));
 	} else {
@@ -78,6 +84,10 @@ export const editUserCollection = (id, formData) => async (dispatch) => {
 			type: EDIT_COLLECTION_SUCCESS,
 			payload: response.data,
 		});
+		dispatch({
+			type: UPDATE_USER_COLLECTIONS,
+			payload: response.data.user_collections,
+		});
 		dispatch(setAlert('Collection updated!', 'success'));
 	} else {
 		dispatch({
@@ -87,13 +97,35 @@ export const editUserCollection = (id, formData) => async (dispatch) => {
 	}
 };
 
+export const addBourbontoUserCollection =
+	(collectionId, bourbonId) => async (dispatch) => {
+		const response = await addBourbon(collectionId, bourbonId);
+		if (response.status === 200) {
+			dispatch({
+				type: UPDATE_USER_COLLECTIONS,
+				payload: response.data.user_collections,
+			});
+			dispatch(setAlert('Added Bourbon!', 'success'));
+		} else {
+			dispatch(setAlert(response.data.message, 'danger'));
+		}
+	};
+
 export const deleteBourbonFromUserCollection =
 	(collectionId, bourbonId) => async (dispatch) => {
 		const response = await deleteBourbon(collectionId, bourbonId);
 		if (response.status === 200) {
 			dispatch({
 				type: DELETE_BOURBON_FROM_COLLECTION_SUCCESS,
-				payload: { collectionId, bourbonId, collection: response.data },
+				payload: {
+					collectionId,
+					bourbonId,
+					collection: response.data.collection,
+				},
+			});
+			dispatch({
+				type: UPDATE_USER_COLLECTIONS,
+				payload: response.data.user_collections,
 			});
 			dispatch(setAlert('Deleted Bourbon!', 'success'));
 		} else {
@@ -110,6 +142,10 @@ export const deleteUserCollection = (id) => async (dispatch) => {
 		dispatch({
 			type: DELETE_COLLECTION_SUCCESS,
 			payload: id,
+		});
+		dispatch({
+			type: UPDATE_USER_COLLECTIONS,
+			payload: response.data,
 		});
 		dispatch(setAlert('Deleted Collection!', 'success'));
 	} else {

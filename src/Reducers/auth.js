@@ -8,6 +8,7 @@ import {
 	LOGOUT_FAILURE,
 	REGISTER_SUCCESS,
 	REGISTER_FAILURE,
+	UPDATE_USER_COLLECTIONS,
 } from '../Actions/types';
 
 const initialState = {
@@ -56,6 +57,12 @@ export default function auth(state = initialState, action) {
 			return {
 				...state,
 				loading: false,
+			};
+		case UPDATE_USER_COLLECTIONS:
+			return {
+				...state,
+				loading: false,
+				user: { ...state.user, collections: payload },
 			};
 		default:
 			return state;

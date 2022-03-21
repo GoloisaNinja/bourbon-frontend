@@ -235,6 +235,29 @@ export const editUserCollection = async (id, formData) => {
 	}
 };
 
+// Add a bourbon to user collection based on auth, collection ID and bourbon ID
+export const addBourbonToUserCollection = async (collectionId, bourbonId) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-typd': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = { bourbonId };
+	try {
+		const response = await axios.post(
+			`${baseURL}/collection/add/${collectionId}?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
 // Delete a bourbon from user collection based on auth, collection ID and bourbon ID
 export const deleteBourbonFromUserCollection = async (
 	collectionId,
