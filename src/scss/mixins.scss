@@ -23,6 +23,25 @@
 		opacity: 0.5;
 	}
 }
+@mixin no_animation_gradient_button {
+	background: none;
+	border: none;
+	outline: none;
+	color: #fff;
+	font-family: 'Readex Pro', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	background: -webkit-linear-gradient(left, $pink-color, $teal-color);
+	box-shadow: 0 0 10px 5px #a200d6;
+	cursor: pointer;
+	width: 100%;
+	padding: 15px;
+	border-radius: 5px;
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
 
 @mixin gradient_text {
 	background: -webkit-linear-gradient(left, $pink-color 30%, $teal-color 60%);

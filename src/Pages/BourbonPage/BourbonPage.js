@@ -58,14 +58,13 @@ const BourbonPage = ({
 			<button onClick={(e) => navigate(-1)}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>
+				<BourbonPricing pricingArray={bourbon.price_array} />
 				{auth.isAuthenticated && (
 					<span className={styles.actions_group}>
 						<MdOutlineCollectionsBookmark onClick={() => handleModal()} />
 						<MdStarBorder />
 					</span>
 				)}
-
-				<BourbonPricing pricingArray={bourbon.price_array} />
 			</div>
 			<div className={styles.lower_container}>
 				<div className={styles.score_container}>

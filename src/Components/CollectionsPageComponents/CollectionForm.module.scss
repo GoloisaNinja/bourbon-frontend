@@ -24,7 +24,7 @@
 			margin-bottom: 0;
 		}
 		> button {
-			@include gradient_button;
+			@include no_animation_gradient_button;
 		}
 	}
 }

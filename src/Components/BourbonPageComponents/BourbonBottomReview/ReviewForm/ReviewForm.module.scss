@@ -32,7 +32,7 @@
 			font-family: 'Readex Pro', sans-serif;
 		}
 		> button {
-			@include gradient_button;
+			@include no_animation_gradient_button;
 		}
 	}
 }
