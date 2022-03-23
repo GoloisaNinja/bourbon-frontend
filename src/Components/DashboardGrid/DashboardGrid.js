@@ -33,7 +33,7 @@ const DashboardGrid = () => {
 			title: `Your Wishlists aren't going to share themselves!`,
 			content: `Create, manage, and share your wishlists here.`,
 			btnObj: {
-				path: `/`,
+				path: `/wishlists`,
 				text: `Your Wishlists`,
 			},
 		},

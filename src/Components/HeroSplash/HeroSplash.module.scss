@@ -2,7 +2,8 @@
 $dash-bg: url('../../images/dashboard.webp');
 $bourbon-bg: url('../../images/landing.webp');
 $reviews-bg: url('../../images/reviews.webp');
-$collections-bg: url('../../images//collections.webp');
+$collections-bg: url('../../images/collections.webp');
+$wishlists-bg: url('../../images/wishlists.webp');
 
 @include hero_splash;
 
@@ -35,6 +36,14 @@ $collections-bg: url('../../images//collections.webp');
 	height: auto;
 	aspect-ratio: 4/3;
 	background: $collections-bg;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.wishlists {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4/3;
+	background: $wishlists-bg;
 	background-size: cover;
 	background-repeat: no-repeat;
 }

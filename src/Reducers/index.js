@@ -5,6 +5,7 @@ import bourbons from './bourbons';
 import bourbon from './bourbon';
 import reviews from './reviews';
 import collections from './collections';
+import wishlists from './wishlists';
 
 export default combineReducers({
 	alert,
@@ -13,4 +14,5 @@ export default combineReducers({
 	bourbon,
 	reviews,
 	collections,
+	wishlists,
 });

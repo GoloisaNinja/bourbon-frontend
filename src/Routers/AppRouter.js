@@ -11,6 +11,9 @@ import DashboardPage from '../Pages/DashboardPage/DashboardPage';
 import ReviewsPage from '../Pages/ReviewsPage/ReviewsPage';
 import CollectionsPage from '../Pages/CollectionsPage/CollectionsPage';
 import CollectionPage from '../Pages/CollectionPage/CollectionPage';
+import WishlistsPage from '../Pages/WishlistsPage/WishlistsPage';
+import WishlistPage from '../Pages/WishlistPage/WishlistPage';
+import NotFound from '../Pages/NotFound/NotFound';
 import PrivateRoute from '../Components/Routing/PrivateRoute';
 
 import { Provider } from 'react-redux';
@@ -43,6 +46,13 @@ const AppRouter = () => {
 							element={<CollectionPage />}
 						/>
 					</Route>
+					<Route path='/wishlists' element={<PrivateRoute />}>
+						<Route path='/wishlists' element={<WishlistsPage />} />
+					</Route>
+					<Route path='/wishlists/:wishlistId' element={<PrivateRoute />}>
+						<Route path='/wishlists/:wishlistId' element={<WishlistPage />} />
+					</Route>
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 				<Footer />
 			</Router>

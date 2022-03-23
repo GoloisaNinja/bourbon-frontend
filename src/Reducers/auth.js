@@ -9,6 +9,7 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAILURE,
 	UPDATE_USER_COLLECTIONS,
+	UPDATE_USER_WISHLISTS,
 } from '../Actions/types';
 
 const initialState = {
@@ -63,6 +64,12 @@ export default function auth(state = initialState, action) {
 				...state,
 				loading: false,
 				user: { ...state.user, collections: payload },
+			};
+		case UPDATE_USER_WISHLISTS:
+			return {
+				...state,
+				loading: false,
+				user: { ...state.user, wishlists: payload },
 			};
 		default:
 			return state;

@@ -9,7 +9,7 @@ import {
 import Loading from '../../Components/Loading/Loading';
 import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import ContentList from '../../Components//ContentList/ContentList';
-import CollectionDetails from '../../Components/CollectionsPageComponents/CollectionDetails';
+import ContentDetails from '../../Components/ContentDetails/ContentDetails';
 import ScrollToTop from '../../Components/ScrollToTop/ScrollToTop';
 import styles from './CollectionsPage.module.scss';
 
@@ -48,9 +48,9 @@ const CollectionsPage = ({
 				<ContentList
 					content={collections}
 					handleSetContent={handleSetQuicklook}
-					contentObj={{ type: 'Collections', contentLabel: 'name' }}
+					contentObj={{ type: 'Collection', contentLabel: 'name' }}
 				/>
-				<CollectionDetails collection={quick_look} />
+				<ContentDetails contentObject={quick_look} type='Collection' />
 			</section>
 		</div>
 	);

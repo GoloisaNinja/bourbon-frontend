@@ -303,6 +303,161 @@ export const deleteUserCollection = async (id) => {
 	}
 };
 
+// Wishlist Calls
+
+// Create a new user Wishlist
+export const postUserWishlist = async (formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.post(
+			`${baseURL}/wishlist?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Get all Wishlists based on authenticated user
+export const getUserWishlists = async () => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.get(
+			`${baseURL}/wishlists?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Get single wishlist for auth user with wishlist id
+export const getUserWishlistById = async (id) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.get(
+			`${baseURL}/wishlist/${id}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Edit a Wishlist Name and possibly the privacy flag
+export const editUserWishlist = async (id, formData) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = formData;
+	try {
+		const response = await axios.patch(
+			`${baseURL}/wishlist/update/${id}?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Add a bourbon to user wishlist based on auth, wishlist ID and bourbon ID
+export const addBourbonToUserWishlist = async (wishlistId, bourbonId) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-typd': 'application/json',
+			Authorization: token,
+		},
+	};
+	const body = { bourbonId };
+	try {
+		const response = await axios.post(
+			`${baseURL}/wishlist/add/${wishlistId}?apiKey=${apikey}`,
+			body,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Delete a bourbon from user wishlist based on auth, wishlist ID and bourbon ID
+export const deleteBourbonFromUserWishlist = async (wishlistId, bourbonId) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-typd': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.delete(
+			`${baseURL}/wishlist/delete/${wishlistId}/${bourbonId}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
+// Delete an entire user wishlist based on user auth and wishlist ID
+export const deleteUserWishlist = async (id) => {
+	const token = localStorage.getItem('token');
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: token,
+		},
+	};
+	try {
+		const response = await axios.delete(
+			`${baseURL}/wishlist/${id}?apiKey=${apikey}`,
+			config
+		);
+		return response;
+	} catch (error) {
+		console.log(error.response);
+		return error.response;
+	}
+};
+
 // User Auth Calls
 
 export const loginUser = async (email, password) => {

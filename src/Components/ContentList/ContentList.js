@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlinePlus } from 'react-icons/hi';
-import CollectionForm from '../CollectionsPageComponents/CollectionForm';
+import ContentForm from '../ContentForm/ContentForm';
 import Modal from '../Modal/Modal';
 import styles from './ContentList.module.scss';
 
@@ -16,8 +16,8 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 			{content.length ? (
 				<>
 					<div className={styles.main_content}>
-						<h1>{`${contentObj.type} List`}</h1>
-						{contentObj.type !== 'Reviews' && (
+						<h1>{`${contentObj.type}s List`}</h1>
+						{contentObj.type !== 'Review' && (
 							<div>
 								<HiOutlinePlus onClick={() => handleModal()} />
 							</div>
@@ -28,15 +28,15 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 							className={styles.main_content_btn}
 							key={item._id}
 							onClick={(e) => handleSetContent(item)}>
-							{item[contentObj.contentLabel]}{' '}
+							{item[contentObj?.contentLabel]}{' '}
 							<span>{item.updatedAt.slice(0, 10)}</span>
 						</button>
 					))}
 				</>
 			) : (
 				<div className={styles.empty_div}>
-					<h1>{`No ${contentObj.type}`}</h1>
-					{content.type === 'Reviews' ? (
+					<h1>{`No ${contentObj.type}s`}</h1>
+					{contentObj.type === 'Review' ? (
 						<button onClick={(e) => navigate('/bourbons')}>Go Explore!</button>
 					) : (
 						<button onClick={() => handleModal()}>Create One!</button>
@@ -46,9 +46,9 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 			{show && (
 				<Modal
 					contents={{
-						component: CollectionForm,
+						component: ContentForm,
 						handleModal: handleModal,
-						details: { isEdit: false },
+						details: { isEdit: false, type: contentObj.type },
 					}}
 				/>
 			)}

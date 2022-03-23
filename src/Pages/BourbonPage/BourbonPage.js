@@ -31,6 +31,7 @@ const BourbonPage = ({
 	const params = useParams();
 	const navigate = useNavigate();
 	const bourbonId = params.bourbonId;
+	const [addType, setAddType] = useState('');
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
@@ -47,7 +48,8 @@ const BourbonPage = ({
 		return () => cleanUpBourbon();
 	}, [bourbonId, getSingleBourbon, getBourbonReviews, cleanUpBourbon]);
 
-	const handleModal = () => {
+	const handleModal = (type) => {
+		setAddType(type);
 		setShow(!show);
 	};
 
@@ -61,8 +63,10 @@ const BourbonPage = ({
 				<BourbonPricing pricingArray={bourbon.price_array} />
 				{auth.isAuthenticated && (
 					<span className={styles.actions_group}>
-						<MdOutlineCollectionsBookmark onClick={() => handleModal()} />
-						<MdStarBorder />
+						<MdOutlineCollectionsBookmark
+							onClick={() => handleModal('Collection')}
+						/>
+						<MdStarBorder onClick={() => handleModal('Wishlist')} />
 					</span>
 				)}
 			</div>
@@ -92,7 +96,11 @@ const BourbonPage = ({
 			</div>
 			{show && (
 				<Modal
-					contents={{ component: AddBourbonForm, handleModal: handleModal }}
+					contents={{
+						component: AddBourbonForm,
+						handleModal: handleModal,
+						details: { type: addType },
+					}}
 				/>
 			)}
 		</div>

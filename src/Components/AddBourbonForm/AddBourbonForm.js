@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { addBourbontoUserCollection } from '../../Actions/collections';
+import { addBourbontoUserWishlist } from '../../Actions/wishlists';
 import smoothscroll from 'smoothscroll-polyfill';
 import styles from './AddBourbonForm.module.scss';
 
@@ -11,72 +12,95 @@ const AddBourbonForm = ({
 	collections,
 	bourbon,
 	addBourbontoUserCollection,
+	addBourbontoUserWishlist,
+	wishlists,
+	details,
 }) => {
-	const [collection, setCollection] = useState(undefined);
-	const [validCollections, setValidCollections] = useState([]);
+	const [content, setContent] = useState(undefined);
+	const [validContentArray, setValidContentArray] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (collections.length > 0) {
+		let contentArray = [];
+		if (details.type === 'Collection') {
+			contentArray = collections;
+		} else {
+			contentArray = wishlists;
+		}
+		if (contentArray.length > 0) {
 			let arr = [
 				{
 					_id: '0',
-					collection_id: 'placeholder',
-					collection_name: 'select...',
+					[`${details.type.toLowerCase()}_id`]: 'placeholder',
+					[`${details.type.toLowerCase()}_name`]: 'select...',
 				},
 			];
-			for (let i = 0; i < collections.length; i++) {
+			for (let i = 0; i < contentArray.length; i++) {
 				if (
-					!collections[i].bourbons.some(
+					!contentArray[i].bourbons.some(
 						(userbourbon) => userbourbon.bourbon_id === bourbon._id
 					)
 				) {
-					arr.push(collections[i]);
+					arr.push(contentArray[i]);
 				}
 			}
-			setValidCollections(arr);
+			setValidContentArray(arr);
 		}
-	}, [bourbon._id, collections]);
-	const handleSelectCollection = (e) => {
-		setCollection(e.target.value);
+	}, [bourbon._id, collections, details.type, wishlists]);
+	const handleSelectContent = (e) => {
+		setContent(e.target.value);
+	};
+	const handleNavigate = () => {
+		if (details.type === 'Collection') {
+			navigate('/collections');
+		} else {
+			navigate('/wishlists');
+		}
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		smoothscroll.polyfill();
-		addBourbontoUserCollection(collection, bourbon._id);
+		if (details.type === 'Collection') {
+			addBourbontoUserCollection(content, bourbon._id);
+		} else {
+			addBourbontoUserWishlist(content, bourbon._id);
+		}
+
 		handleModal();
 		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	};
 	return (
 		<div className={styles.form_container}>
-			<h1>Add Bourbon to Collection</h1>
-			{validCollections.length > 1 ? (
+			<h1>{`Add Bourbon to ${details.type}`}</h1>
+			{validContentArray.length > 1 ? (
 				<form onSubmit={(e) => handleSubmit(e)}>
-					<label>Select a Collection</label>
+					<label>{`Select a ${details.type}`}</label>
 					<select
-						value={collection}
-						name='collection'
-						onChange={(e) => handleSelectCollection(e)}>
-						{validCollections.map((v_collection) => (
-							<option key={v_collection._id} value={v_collection.collection_id}>
-								{v_collection.collection_name}
+						value={content}
+						name='content'
+						onChange={(e) => handleSelectContent(e)}>
+						{validContentArray.map((content) => (
+							<option
+								key={content._id}
+								value={content[`${details.type.toLowerCase()}_id`]}>
+								{content[`${details.type.toLowerCase()}_name`]}
 							</option>
 						))}
 					</select>
 					<button
-						disabled={collection === undefined || collection === 'placeholder'}
+						disabled={content === undefined || content === 'placeholder'}
 						type='submit'>
-						add to collection
+						{`add to ${details.type.toLowerCase()}`}
 					</button>
 				</form>
 			) : (
 				<div className={styles.empty_container}>
-					<h3>No available collections...</h3>
+					<h3>{`No available ${details.type.toLowerCase()}s...`}</h3>
 					<p>
-						This bourbon either exists in all your collections, or you may not
-						have any collections yet.
+						{`This bourbon either exists in all your ${details.type.toLowerCase()}s, or you may not
+						have any ${details.type.toLowerCase()}s yet.`}
 					</p>
-					<button onClick={() => navigate('/collections')}>
-						Manage Collections
+					<button onClick={() => handleNavigate()}>
+						{`Manage ${details.type}`}
 					</button>
 				</div>
 			)}
@@ -84,14 +108,18 @@ const AddBourbonForm = ({
 	);
 };
 AddBourbonForm.propTypes = {
-	collections: PropTypes.array.isRequired,
+	collections: PropTypes.array,
+	wishlists: PropTypes.array,
 	bourbon: PropTypes.object.isRequired,
 	addBourbontoUserCollection: PropTypes.func.isRequired,
+	addBourbontoUserWishlist: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
 	collections: state.auth.user.collections,
+	wishlists: state.auth.user.wishlists,
 	bourbon: state.bourbon.bourbon,
 });
-export default connect(mapStateToProps, { addBourbontoUserCollection })(
-	AddBourbonForm
-);
+export default connect(mapStateToProps, {
+	addBourbontoUserCollection,
+	addBourbontoUserWishlist,
+})(AddBourbonForm);

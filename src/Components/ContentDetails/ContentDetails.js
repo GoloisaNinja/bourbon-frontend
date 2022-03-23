@@ -1,14 +1,13 @@
 import { useState } from 'react';
-
 import { Link } from 'react-router-dom';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
-import CollectionForm from './CollectionForm';
+import ContentForm from '../ContentForm/ContentForm';
 import Modal from '../Modal/Modal';
 import ConfirmCancel from '../Modal/ConfirmCancel';
 import smoothscroll from 'smoothscroll-polyfill';
-import styles from './CollectionDetails.module.scss';
+import styles from './ContentDetails.module.scss';
 
-const CollectionDetails = ({ collection }) => {
+const ContentDetails = ({ contentObject, type }) => {
 	const [show, setShow] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
 	const [showDelete, setShowDelete] = useState(false);
@@ -32,7 +31,7 @@ const CollectionDetails = ({ collection }) => {
 	};
 	return (
 		<div className={styles.container}>
-			{collection ? (
+			{contentObject ? (
 				<>
 					<div>
 						<h1>Quick Look</h1>
@@ -44,24 +43,28 @@ const CollectionDetails = ({ collection }) => {
 					<div className={styles.details_container}>
 						<div>
 							<div>
-								<p>{collection.bourbons.length}</p>
+								<p>{contentObject.bourbons.length}</p>
 							</div>
 							<Link
 								className={
-									collection.bourbons.length > 0
+									contentObject.bourbons.length > 0
 										? styles.active
 										: styles.disabled
 								}
-								to={`/collections/${collection._id}`}
+								to={
+									type === 'Collection'
+										? `/collections/${contentObject._id}`
+										: `/wishlists/${contentObject._id}`
+								}
 								onClick={() => scrollToTop()}>
-								Go To Collection
+								{`Go to ${type}`}
 							</Link>
 						</div>
 						<div>
-							<h3>{collection.name}</h3>
-							{collection.bourbons.length > 0 ? (
+							<h3>{contentObject.name}</h3>
+							{contentObject.bourbons.length > 0 ? (
 								<ul>
-									{collection.bourbons.map((bourbon) => (
+									{contentObject.bourbons.map((bourbon) => (
 										<li key={bourbon._id}>
 											<Link to={`/bourbons/${bourbon._id}`}>
 												{bourbon.title}
@@ -76,7 +79,7 @@ const CollectionDetails = ({ collection }) => {
 								</ul>
 							) : (
 								<>
-									<p>Collection is empty! Go add some bourbons!</p>
+									<p>{`${type} is empty! Go add some bourbons!`}</p>
 									<Link
 										className={styles.btn_explore}
 										onClick={() => scrollToTop()}
@@ -90,7 +93,7 @@ const CollectionDetails = ({ collection }) => {
 				</>
 			) : (
 				<div>
-					<h1>Select a collection from your list...</h1>
+					<h1>{`Select a ${type.toLowerCase()} from your list...`}</h1>
 				</div>
 			)}
 			{show && (
@@ -100,9 +103,9 @@ const CollectionDetails = ({ collection }) => {
 						handleModal: handleModal,
 						details: {
 							content: {
-								type: 'Collection',
-								id: collection._id,
-								name: collection.name,
+								type: type,
+								id: contentObject._id,
+								name: contentObject.name,
 							},
 						},
 					}}
@@ -111,9 +114,9 @@ const CollectionDetails = ({ collection }) => {
 			{showEdit && (
 				<Modal
 					contents={{
-						component: CollectionForm,
+						component: ContentForm,
 						handleModal: handleEditModal,
-						details: { isEdit: true },
+						details: { isEdit: true, type: type },
 					}}
 				/>
 			)}
@@ -124,7 +127,7 @@ const CollectionDetails = ({ collection }) => {
 						handleModal: handleDeleteBourbonModal,
 						details: {
 							content: {
-								type: 'Bourbon',
+								type: `${type}-`,
 								id: bourbonToDelete.id,
 								name: bourbonToDelete.title,
 							},
@@ -136,4 +139,4 @@ const CollectionDetails = ({ collection }) => {
 	);
 };
 
-export default CollectionDetails;
+export default ContentDetails;

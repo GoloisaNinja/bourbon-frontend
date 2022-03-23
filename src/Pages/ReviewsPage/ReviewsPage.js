@@ -44,7 +44,7 @@ const ReviewsPage = ({
 				<ContentList
 					content={reviews}
 					handleSetContent={handleSetReview}
-					contentObj={{ type: 'Reviews', contentLabel: 'reviewTitle' }}
+					contentObj={{ type: 'Review', contentLabel: 'reviewTitle' }}
 				/>
 				<ReviewDetails review={review} />
 			</section>
