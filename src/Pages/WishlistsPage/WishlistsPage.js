@@ -11,6 +11,7 @@ import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import ContentList from '../../Components//ContentList/ContentList';
 import ContentDetails from '../../Components/ContentDetails/ContentDetails';
 import ScrollToTop from '../../Components/ScrollToTop/ScrollToTop';
+import Head from '../../Components/Head/Head';
 import styles from './WishlistsPage.module.scss';
 
 const WishlistsPage = ({
@@ -38,6 +39,12 @@ const WishlistsPage = ({
 		<Loading />
 	) : (
 		<div className={styles.wishlists_container}>
+			<Head
+				meta={{
+					title: `hello bourbon | Wishlists Page`,
+					description: `hello bourbon Wishlists | All your greatest bourbon wishes in one spot!`,
+				}}
+			/>
 			<ScrollToTop />
 			<HeroSplash type={`wishlists`} textUpper={`Your`} textLower={textLower} />
 			<section className={styles.wishlists_section}>

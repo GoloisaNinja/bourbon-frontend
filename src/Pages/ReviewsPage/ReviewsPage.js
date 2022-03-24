@@ -10,6 +10,7 @@ import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import ContentList from '../../Components/ContentList/ContentList';
 import ReviewDetails from '../../Components/ReviewsPageComponents/ReviewDetails/ReviewDetails';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import ScrollToTop from '../../Components/ScrollToTop/ScrollToTop';
 import styles from './ReviewsPage.module.scss';
 
@@ -38,6 +39,12 @@ const ReviewsPage = ({
 		<Loading />
 	) : (
 		<div className={styles.reviews_container}>
+			<Head
+				meta={{
+					title: `hello bourbon | Reviews Page`,
+					description: `hello bourbon Reviews | All your reviews in one spot!`,
+				}}
+			/>
 			<ScrollToTop />
 			<HeroSplash type={`reviews`} textUpper={`Your`} textLower={textLower} />
 			<section className={styles.reviews_section}>

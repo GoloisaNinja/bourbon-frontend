@@ -17,6 +17,7 @@ export const getPaginatedBourbons =
 				});
 				dispatch(setAlert('Uh-oh! No bourbons!', 'danger'));
 			}
+			return response.data.meta;
 		} else {
 			dispatch({
 				type: GET_PAGINATED_FAILURE,

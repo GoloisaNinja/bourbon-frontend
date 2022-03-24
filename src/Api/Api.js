@@ -37,11 +37,10 @@ export const getSingleBourbon = async (id) => {
 		const response = await axios.get(
 			`${baseURL}/bourbons/${id}?apiKey=${apikey}`
 		);
-		if (response.status === 200) {
-			return response;
-		}
+		return response;
 	} catch (error) {
-		console.log(error);
+		console.log(error.response);
+		return error.response;
 	}
 };
 

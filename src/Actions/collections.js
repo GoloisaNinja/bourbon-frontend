@@ -67,8 +67,9 @@ export const getUserCollectionById = (id) => async (dispatch) => {
 	if (response.status === 200) {
 		dispatch({
 			type: GET_USER_COLLECTION_SUCCESS,
-			payload: response.data,
+			payload: response.data.collection,
 		});
+		return response.data.meta;
 	} else {
 		dispatch({
 			type: GET_USER_COLLECTION_FAILURE,

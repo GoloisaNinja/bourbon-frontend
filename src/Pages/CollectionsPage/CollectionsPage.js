@@ -7,6 +7,7 @@ import {
 	cleanupQuicklook,
 } from '../../Actions/collections';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import ContentList from '../../Components//ContentList/ContentList';
 import ContentDetails from '../../Components/ContentDetails/ContentDetails';
@@ -38,6 +39,12 @@ const CollectionsPage = ({
 		<Loading />
 	) : (
 		<div className={styles.collections_container}>
+			<Head
+				meta={{
+					title: `hello bourbon | Collections Page`,
+					description: `hello bourbon Collections | All your collections in one spot!`,
+				}}
+			/>
 			<ScrollToTop />
 			<HeroSplash
 				type={`collections`}

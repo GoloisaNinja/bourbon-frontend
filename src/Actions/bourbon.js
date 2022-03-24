@@ -8,23 +8,17 @@ import { getSingleBourbon as getBourbon } from '../Api/Api';
 
 export const getSingleBourbon = (id) => async (dispatch) => {
 	const response = await getBourbon(id);
-	if (response) {
-		if (response.status === 200) {
-			dispatch({
-				type: GET_BOURBON_SUCCESS,
-				payload: response.data,
-			});
-		} else {
-			dispatch({
-				type: GET_BOURBON_FAILURE,
-			});
-			dispatch(setAlert('Failed to load bourbon...', 'danger'));
-		}
+	if (response.status === 200) {
+		dispatch({
+			type: GET_BOURBON_SUCCESS,
+			payload: response.data.bourbon,
+		});
+		return response.data.meta;
 	} else {
 		dispatch({
 			type: GET_BOURBON_FAILURE,
 		});
-		dispatch(setAlert('Failed to load bourbon...', 'danger'));
+		dispatch(setAlert(response.data.message, 'danger'));
 	}
 };
 

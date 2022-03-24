@@ -28,7 +28,7 @@ const ReviewDetails = ({ review }) => {
 					</div>
 					<div>
 						<div className={styles.details_upper_card}>
-							<p>Bourbon</p>
+							<p>Bourbon Reviewed</p>
 							<p>
 								<Link
 									className={styles.bourbon_link}
@@ -42,7 +42,7 @@ const ReviewDetails = ({ review }) => {
 							<p>{review.reviewTitle}</p>
 						</div>
 						<div className={`${styles.details_upper_card} ${styles.score}`}>
-							<p>Score</p>
+							{/* <p>Score</p> */}
 							<p>{review.reviewScore}</p>
 						</div>
 					</div>

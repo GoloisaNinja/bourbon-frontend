@@ -11,6 +11,7 @@ import BourbonDetails from '../../Components/BourbonPageComponents/BourbonDetail
 import UpperReview from '../../Components/BourbonPageComponents/UpperReview/UpperReview';
 import ReviewSection from '../../Components/BourbonPageComponents/BourbonBottomReview/ReviewSection/ReviewSection';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import {
 	MdErrorOutline,
 	MdOutlineCollectionsBookmark,
@@ -33,13 +34,15 @@ const BourbonPage = ({
 	const bourbonId = params.bourbonId;
 	const [addType, setAddType] = useState('');
 	const [show, setShow] = useState(false);
+	const [meta, setMeta] = useState({});
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.scroll(0, 0);
 		}
 		const fetchBourbonData = async () => {
-			await getSingleBourbon(bourbonId);
+			const response = await getSingleBourbon(bourbonId);
+			setMeta(response);
 			await getBourbonReviews(bourbonId);
 		};
 		fetchBourbonData();
@@ -57,6 +60,7 @@ const BourbonPage = ({
 		<Loading />
 	) : bourbon ? (
 		<div className={styles.container}>
+			<Head meta={meta} />
 			<button onClick={(e) => navigate(-1)}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>

@@ -8,6 +8,7 @@ import {
 } from '../../Actions/collections';
 import Search from '../../Components/Search/Search';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import BourbonsGrid from '../../Components/BourbonsGrid/BourbonsGrid';
 import styles from './CollectionPage.module.scss';
 
@@ -21,8 +22,13 @@ const CollectionPage = ({
 	const params = useParams();
 	const collectionId = params.collectionId;
 	const [searchTerm, setSearchTerm] = useState('');
+	const [meta, setMeta] = useState({});
 	useEffect(() => {
-		getUserCollectionById(collectionId);
+		const fetchCollection = async () => {
+			const response = await getUserCollectionById(collectionId);
+			setMeta(response);
+		};
+		fetchCollection();
 		return () => {
 			cleanupCollection();
 		};
@@ -37,6 +43,7 @@ const CollectionPage = ({
 		<Loading />
 	) : (
 		<div className={styles.container}>
+			<Head meta={meta} />
 			<h1>
 				{collection.name} <span> 🥃</span>
 			</h1>

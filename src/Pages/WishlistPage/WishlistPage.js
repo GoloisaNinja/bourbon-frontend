@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getUserWishlistById, cleanupWishlist } from '../../Actions/wishlists';
 import Search from '../../Components/Search/Search';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import BourbonsGrid from '../../Components/BourbonsGrid/BourbonsGrid';
 import styles from './WishlistPage.module.scss';
 
@@ -18,8 +19,13 @@ const WishlistPage = ({
 	const params = useParams();
 	const wishlistId = params.wishlistId;
 	const [searchTerm, setSearchTerm] = useState('');
+	const [meta, setMeta] = useState({});
 	useEffect(() => {
-		getUserWishlistById(wishlistId);
+		const fetchWishlist = async () => {
+			const response = await getUserWishlistById(wishlistId);
+			setMeta(response);
+		};
+		fetchWishlist();
 		return () => {
 			cleanupWishlist();
 		};
@@ -34,6 +40,7 @@ const WishlistPage = ({
 		<Loading />
 	) : (
 		<div className={styles.container}>
+			<Head meta={meta} />
 			<h1>
 				{wishlist.name} <span> 🥃</span>
 			</h1>

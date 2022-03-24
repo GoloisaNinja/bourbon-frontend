@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 import Search from '../../Components/Search/Search';
 import Loading from '../../Components/Loading/Loading';
+import Head from '../../Components/Head/Head';
 import smoothscroll from 'smoothscroll-polyfill';
 import BourbonsGrid from '../../Components/BourbonsGrid/BourbonsGrid';
 import styles from './BourbonsPage.module.scss';
@@ -15,6 +16,7 @@ const BourbonsPage = ({
 	getPaginatedBourbons,
 }) => {
 	const [currentPage, setCurrentPage] = useState(1);
+	const [meta, setMeta] = useState({});
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -67,8 +69,9 @@ const BourbonsPage = ({
 			const pageParams = await returnParams();
 			const { page, search, sort } = pageParams;
 			try {
-				await getPaginatedBourbons(page, search, sort);
+				const response = await getPaginatedBourbons(page, search, sort);
 				setCurrentPage(parseInt(page));
+				setMeta(response);
 			} catch (error) {
 				console.log(error);
 			}
@@ -79,6 +82,7 @@ const BourbonsPage = ({
 		<Loading />
 	) : (
 		<div>
+			<Head meta={meta} />
 			<div className={styles.intro}>
 				<h1>
 					Find your next obsession <span> 🥃</span>
