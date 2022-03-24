@@ -183,6 +183,7 @@ export const getUserCollections = async () => {
 			`${baseURL}/collections?apiKey=${apikey}`,
 			config
 		);
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error.response);
@@ -472,12 +473,10 @@ export const loginUser = async (email, password) => {
 			body,
 			config
 		);
-		if (response.status === 200) {
-			localStorage.setItem('token', response.data.token);
-			return response.data;
-		}
+		return response;
 	} catch (error) {
-		console.log(error);
+		console.log(error.repsonse);
+		return error.response;
 	}
 };
 

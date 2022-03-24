@@ -21,18 +21,18 @@ export const loginUser = (email, password) => async (dispatch) => {
 		type: START_LOGIN,
 	});
 	const response = await getUser(email, password);
-	if (response !== undefined) {
+	if (response.status === 200) {
 		dispatch({
 			type: LOGIN_SUCCESS,
-			payload: response,
+			payload: response.data,
 		});
 		dispatch(setAlert('Login Successful!', 'success'));
-		localStorage.setItem('token', response.token);
+		localStorage.setItem('token', response.data.token);
 	} else {
 		dispatch({
 			type: LOGIN_FAILURE,
 		});
-		dispatch(setAlert('Login Failed', 'danger'));
+		dispatch(setAlert(response.data.message, 'danger'));
 	}
 };
 
@@ -66,8 +66,8 @@ export const registerUser = (formData) => async (dispatch) => {
 			type: REGISTER_SUCCESS,
 			payload: response.data,
 		});
-		localStorage.setItem('token', response.token);
-		dispatch(setAlert('Account Created!', 'success'));
+		localStorage.setItem('token', response.data.token);
+		dispatch(setAlert('Welcome! Account Created!', 'success'));
 	} else {
 		dispatch({
 			type: REGISTER_FAILURE,
