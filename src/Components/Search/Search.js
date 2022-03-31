@@ -10,15 +10,18 @@ const Search = ({ handleSearch }) => {
 	};
 	return (
 		<div className={styles.search_container}>
-			<input
-				type='text'
-				value={searchTerm}
-				placeholder='Search'
-				onChange={(e) => setSearchTerm(e.target.value)}
-			/>
-			<button onClick={(e) => handleClick()}>
-				<GoSearch />
-			</button>
+			<h2>Search</h2>
+			<div>
+				<input
+					type='text'
+					value={searchTerm}
+					placeholder='ex. barton'
+					onChange={(e) => setSearchTerm(e.target.value)}
+				/>
+				<button onClick={(e) => handleClick()}>
+					<GoSearch />
+				</button>
+			</div>
 		</div>
 	);
 };

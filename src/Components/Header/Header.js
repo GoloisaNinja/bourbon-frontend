@@ -10,7 +10,7 @@ const Header = ({ isAuthenticated, token, logoutUser }) => {
 				<Link to='/'>Home</Link>
 			</li>
 			<li>
-				<Link to='/bourbons'>Bourbons</Link>
+				<Link to='/bourbons?sort=title_asc'>Bourbons</Link>
 			</li>
 			<li>
 				<Link to='/login'>Login</Link>

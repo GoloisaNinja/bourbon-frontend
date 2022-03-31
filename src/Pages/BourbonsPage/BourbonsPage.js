@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 import Search from '../../Components/Search/Search';
+import BourbonsPageFilters from '../../Components/Filters/BourbonsPageFilters';
 import Loading from '../../Components/Loading/Loading';
 import Head from '../../Components/Head/Head';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -60,8 +61,20 @@ const BourbonsPage = ({
 		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	};
 
-	const handleSearch = (searchTerm) => {
-		navigate(`/bourbons?search=${searchTerm}`);
+	const handleSearch = async (searchTerm) => {
+		const pageParams = await returnParams();
+		const { sort } = pageParams;
+		navigate(`/bourbons?search=${searchTerm}&sort=${sort}`);
+	};
+
+	const handleSort = async (sortby, sortdirection) => {
+		const pageParams = await returnParams();
+		const { search } = pageParams;
+		let baseLocation = `/bourbons?`;
+		if (search) {
+			baseLocation = `/bourbons?search=${search}&`;
+		}
+		navigate(`${baseLocation}sort=${sortby}_${sortdirection}`);
 	};
 
 	useEffect(() => {
@@ -89,6 +102,7 @@ const BourbonsPage = ({
 				</h1>
 			</div>
 			<Search handleSearch={handleSearch} />
+			<BourbonsPageFilters handleSort={handleSort} />
 			<BourbonsGrid bourbons={bourbons} />
 			{bourbons.length > 0 && (
 				<>
