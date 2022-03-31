@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaChevronRight } from 'react-icons/fa';
 import {
 	HiOutlineSortAscending,
@@ -7,9 +8,10 @@ import {
 import styles from './BourbonsPageFilters.module.scss';
 
 const BourbonsPageFilters = ({ handleSort }) => {
+	const location = useLocation();
 	const [expand, setExpand] = useState(false);
 	const [sortBy, setSortBy] = useState('title');
-	const [sortDirection, setSortDirection] = useState('asc');
+	const [sortDirection, setSortDirection] = useState('');
 	const handleClick = (e) => {
 		setSortBy(e.target.name);
 		handleSort(e.target.name, sortDirection);
@@ -28,6 +30,12 @@ const BourbonsPageFilters = ({ handleSort }) => {
 		}
 		handleSort(sortBy, directionToSend);
 	};
+	useEffect(() => {
+		const params = new URLSearchParams(location.search);
+		const sortArray = params.get('sort').split('_');
+		const paramBasedDirection = sortArray[1];
+		setSortDirection(paramBasedDirection);
+	}, [location]);
 	return (
 		<div className={styles.container}>
 			<div>
