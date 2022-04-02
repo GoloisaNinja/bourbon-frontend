@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlinePlus } from 'react-icons/hi';
+import smoothscroll from 'smoothscroll-polyfill';
 import ContentForm from '../ContentForm/ContentForm';
 import Modal from '../Modal/Modal';
 import styles from './ContentList.module.scss';
@@ -10,6 +11,11 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 	const navigate = useNavigate();
 	const handleModal = () => {
 		setShow(!show);
+	};
+	const handleNavigate = () => {
+		smoothscroll.polyfill();
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+		navigate('/bourbons?sort=title_asc');
 	};
 	return (
 		<div className={styles.content_list}>
@@ -37,9 +43,7 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 				<div className={styles.empty_div}>
 					<h1>{`No ${contentObj.type}s`}</h1>
 					{contentObj.type === 'Review' ? (
-						<button onClick={(e) => navigate('/bourbons?sort=title_asc')}>
-							Go Explore!
-						</button>
+						<button onClick={() => handleNavigate()}>Go Explore!</button>
 					) : (
 						<button onClick={() => handleModal()}>Create One!</button>
 					)}
