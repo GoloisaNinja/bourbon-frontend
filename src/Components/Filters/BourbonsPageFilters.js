@@ -33,8 +33,8 @@ const BourbonsPageFilters = ({ handleSort }) => {
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
 		const sortArray = params.get('sort').split('_');
-		const paramBasedDirection = sortArray[1];
-		setSortDirection(paramBasedDirection);
+		setSortBy(sortArray[0]);
+		setSortDirection(sortArray[1]);
 	}, [location]);
 	return (
 		<div className={styles.container}>
@@ -46,25 +46,46 @@ const BourbonsPageFilters = ({ handleSort }) => {
 				/>
 			</div>
 			<div className={expand ? styles.expand : null}>
-				<button name='title' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'title' ? styles.active : null}
+					name='title'
+					onClick={(e) => handleClick(e)}>
 					title
 				</button>
-				<button name='abv' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'abv' ? styles.active : null}
+					name='abv'
+					onClick={(e) => handleClick(e)}>
 					abv
 				</button>{' '}
-				<button name='distiller' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'distiller' ? styles.active : null}
+					name='distiller'
+					onClick={(e) => handleClick(e)}>
 					distiller
 				</button>{' '}
-				<button name='bottler' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'bottler' ? styles.active : null}
+					name='bottler'
+					onClick={(e) => handleClick(e)}>
 					bottler
 				</button>{' '}
-				<button name='score' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'score' ? styles.active : null}
+					name='score'
+					onClick={(e) => handleClick(e)}>
 					score
 				</button>{' '}
-				<button name='age' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'age' ? styles.active : null}
+					name='age'
+					onClick={(e) => handleClick(e)}>
 					age
 				</button>{' '}
-				<button name='price' onClick={(e) => handleClick(e)}>
+				<button
+					className={sortBy === 'price' ? styles.active : null}
+					name='price'
+					onClick={(e) => handleClick(e)}>
 					price
 				</button>
 				<button

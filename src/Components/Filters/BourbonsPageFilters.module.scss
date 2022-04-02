@@ -54,6 +54,9 @@
 		> button {
 			@include button-style;
 			padding: 8px 3px;
+			&.active {
+				background-color: $purple-color;
+			}
 			&.sortDirection {
 				@include button-style;
 				background-color: darken($teal-color, 5%);
