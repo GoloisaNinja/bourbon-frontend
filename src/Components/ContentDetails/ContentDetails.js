@@ -83,7 +83,7 @@ const ContentDetails = ({ contentObject, type }) => {
 									<Link
 										className={styles.btn_explore}
 										onClick={() => scrollToTop()}
-										to={`/bourbons`}>
+										to={`/bourbons?sort=title_asc`}>
 										Go Explore!
 									</Link>
 								</>

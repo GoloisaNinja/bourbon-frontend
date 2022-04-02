@@ -37,7 +37,9 @@ const ContentList = ({ content, handleSetContent, contentObj }) => {
 				<div className={styles.empty_div}>
 					<h1>{`No ${contentObj.type}s`}</h1>
 					{contentObj.type === 'Review' ? (
-						<button onClick={(e) => navigate('/bourbons')}>Go Explore!</button>
+						<button onClick={(e) => navigate('/bourbons?sort=title_asc')}>
+							Go Explore!
+						</button>
 					) : (
 						<button onClick={() => handleModal()}>Create One!</button>
 					)}

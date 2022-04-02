@@ -13,7 +13,7 @@ const DashboardGrid = () => {
 			content: `Go on an adventure and find your next
       obsession!`,
 			btnObj: {
-				path: `/bourbons`,
+				path: `/bourbons?sort=title_asc`,
 				text: `Explore`,
 			},
 		},
