@@ -1,16 +1,63 @@
 @import '../../../scss/colors.scss';
+@import '../../../scss/mixins.scss';
 
 .price_container {
-	display: flex;
-	align-items: center;
-	> p:first-child {
-		color: #fff;
-		font-size: 25px;
-		font-weight: bold;
-		margin-right: 5px;
+	display: grid;
+	grid-template-areas:
+		'price'
+		'buy';
+	width: 100%;
+	justify-content: flex-start;
+	grid-gap: 25px;
+	@media (min-width: 355px) {
+		grid-template-areas: 'price buy';
 	}
-	> p {
-		margin-bottom: 0;
+	> div:first-child {
+		display: flex;
+		align-items: center;
+		grid-area: price;
+		> p:first-child {
+			color: #fff;
+			font-size: 25px;
+			font-weight: bold;
+			margin-right: 5px;
+		}
+		> p {
+			margin-bottom: 0;
+		}
+	}
+
+	> div:last-child {
+		display: flex;
+		align-items: center;
+		grid-area: buy;
+		margin-top: 0px;
+		@media (min-width: 355px) {
+			margin-top: 25px;
+		}
+		> button {
+			display: flex;
+			align-items: center;
+			background: none;
+			border: none;
+			font-family: 'Readex Pro', sans-serif;
+			font-size: 16px;
+			font-weight: bold;
+			background-color: darken($red-color, 5%);
+			border-radius: 5px;
+			padding: 8px 10px;
+			color: #fff;
+			border-bottom: 2px solid darken($red-color, 25%);
+			cursor: pointer;
+			transition: all 0.4s ease-in-out;
+			&:hover {
+				background-color: $red-color;
+			}
+			> svg {
+				font-size: 25px;
+				margin-right: 3px;
+			}
+		}
 	}
 }
 .price {

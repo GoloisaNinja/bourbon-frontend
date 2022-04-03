@@ -20,6 +20,9 @@ const Footer = () => {
 				<a href='https://whiskeyraiders.com' rel='noreferrer' target='_blank'>
 					Whiskey Raiders
 				</a>
+				<a href='https://caskers.com' rel='noreferrer' target='_blank'>
+					Caskers
+				</a>
 				<p>
 					Copyright <span className={styles.pink_span}>{year}</span>
 				</p>

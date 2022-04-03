@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
 import styles from './BourbonPricing.module.scss';
 
-const BourbonPricing = ({ pricingArray }) => {
+const BourbonPricing = ({ pricingArray, handleShop }) => {
 	const node_1 = useRef(null);
 	const node_2 = useRef(null);
 	const node_3 = useRef(null);
@@ -39,22 +40,30 @@ const BourbonPricing = ({ pricingArray }) => {
 
 	return (
 		<div className={styles.price_container}>
-			<p>Price </p>
-			<p className={styles.price} ref={node_1}>
-				🥃
-			</p>
-			<p className={styles.price} ref={node_2}>
-				🥃
-			</p>
-			<p className={styles.price} ref={node_3}>
-				🥃
-			</p>
-			<p className={styles.price} ref={node_4}>
-				🥃
-			</p>
-			<p className={styles.price} ref={node_5}>
-				🥃
-			</p>
+			<div>
+				<p>Price </p>
+				<p className={styles.price} ref={node_1}>
+					🥃
+				</p>
+				<p className={styles.price} ref={node_2}>
+					🥃
+				</p>
+				<p className={styles.price} ref={node_3}>
+					🥃
+				</p>
+				<p className={styles.price} ref={node_4}>
+					🥃
+				</p>
+				<p className={styles.price} ref={node_5}>
+					🥃
+				</p>
+			</div>
+
+			<div>
+				<button onClick={() => handleShop()}>
+					<HiOutlineShoppingCart /> Shop
+				</button>
+			</div>
 		</div>
 	);
 };

@@ -56,6 +56,12 @@ const BourbonPage = ({
 		setShow(!show);
 	};
 
+	const handleShop = () => {
+		const shopquery = encodeURIComponent(bourbon.title);
+		const caskersbaseurl = 'https://www.caskers.com/catalogsearch/result/?q=';
+		window.open(`${caskersbaseurl}${shopquery}`);
+	};
+
 	return loading ? (
 		<Loading />
 	) : bourbon ? (
@@ -64,7 +70,10 @@ const BourbonPage = ({
 			<button onClick={(e) => navigate(-1)}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>
-				<BourbonPricing pricingArray={bourbon.price_array} />
+				<BourbonPricing
+					pricingArray={bourbon.price_array}
+					handleShop={handleShop}
+				/>
 				{auth.isAuthenticated && (
 					<span className={styles.actions_group}>
 						<MdOutlineCollectionsBookmark
