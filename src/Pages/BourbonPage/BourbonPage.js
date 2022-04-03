@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getSingleBourbon, cleanUpBourbon } from '../../Actions/bourbon';
 import { getBourbonReviews } from '../../Actions/review';
 import Modal from '../../Components/Modal/Modal';
@@ -30,12 +30,12 @@ const BourbonPage = ({
 	auth,
 }) => {
 	const params = useParams();
+	const location = useLocation();
 	const navigate = useNavigate();
 	const bourbonId = params.bourbonId;
 	const [addType, setAddType] = useState('');
 	const [show, setShow] = useState(false);
 	const [meta, setMeta] = useState({});
-
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.scroll(0, 0);
@@ -62,12 +62,7 @@ const BourbonPage = ({
 		window.open(`${caskersbaseurl}${shopquery}`);
 	};
 	const handleGoBack = () => {
-		const bourbonsPageScrollPosition =
-			localStorage.getItem('bourbons_scrollPos') || '0';
-		navigate(-1);
-		setTimeout(() => {
-			window.scrollTo(0, parseInt(bourbonsPageScrollPosition));
-		}, 350);
+		navigate(location.state.navFrom, { state: location.state.pageScrollPos });
 	};
 	return loading ? (
 		<Loading />

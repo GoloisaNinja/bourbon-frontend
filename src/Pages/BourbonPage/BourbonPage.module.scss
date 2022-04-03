@@ -36,19 +36,23 @@
 		font-size: 45px;
 		color: #fff;
 		background-color: darken($pink-color, 15%);
+		box-shadow: 0 0 5px 5px darken($pink-color, 15%);
 		border-radius: 5px;
 		padding: 5px;
 		cursor: pointer;
 		transition: all 0.4s ease-in-out;
 		&:hover {
 			background-color: $pink-color;
+			box-shadow: 0 0 5px 5px $pink-color;
 		}
 	}
 	> svg:last-child {
-		margin-left: 15px;
+		margin-left: 25px;
 		background-color: darken($blue-color, 15%);
+		box-shadow: 0 0 5px 5px darken($blue-color, 15%);
 		&:hover {
 			background-color: $blue-color;
+			box-shadow: 0 0 5px 5px $blue-color;
 		}
 	}
 }

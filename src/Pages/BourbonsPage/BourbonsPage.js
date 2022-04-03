@@ -21,7 +21,6 @@ const BourbonsPage = ({
 	const [meta, setMeta] = useState({});
 	const location = useLocation();
 	const navigate = useNavigate();
-
 	const returnParams = useCallback(async () => {
 		const params = new URLSearchParams(location.search);
 		let page = 1;
@@ -92,6 +91,14 @@ const BourbonsPage = ({
 		};
 		fetchBourbons();
 	}, [location.search, returnParams, getPaginatedBourbons]);
+
+	useEffect(() => {
+		if (typeof window !== undefined) {
+			if (location.state) {
+				window.scrollTo({ top: location.state, left: 0 });
+			}
+		}
+	}, [location]);
 
 	const textLower = (
 		<h1>

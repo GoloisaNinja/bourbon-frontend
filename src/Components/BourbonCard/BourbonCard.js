@@ -1,12 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './BourbonCard.module.scss';
 
 const BourbonCard = ({ bourbon }) => {
 	const { _id, image, title, bottler, distiller, abv, age } = bourbon;
 	const navigate = useNavigate();
+	const location = useLocation();
 	const handleNavigate = () => {
-		localStorage.setItem('bourbons_scrollPos', window.pageYOffset);
-		navigate(`/bourbons/${_id}`);
+		navigate(`/bourbons/${_id}`, {
+			state: {
+				navFrom: `${location.pathname}${location.search}`,
+				pageScrollPos: window.pageYOffset,
+			},
+		});
 	};
 	return (
 		<div className={styles.card_container}>

@@ -20,6 +20,7 @@
 		border-radius: 5px;
 		&:hover {
 			background-color: darken($red-color, 10%);
+			box-shadow: 0 0 5px 5px darken($red-color, 10%);
 		}
 		&:disabled {
 			cursor: not-allowed;

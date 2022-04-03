@@ -45,8 +45,8 @@ const LoginForm = ({ loginUser }) => {
 				<Link to='/register'>Register here</Link>
 			</div>
 			<div>
-				<p>Just exploring?</p>
-				<button onClick={() => handleLoginAsGuest()}>Login as Guest</button>
+				<p>Accounts give you the heeby jeebies?</p>
+				<button onClick={() => handleLoginAsGuest()}>login as guest</button>
 			</div>
 		</div>
 	);

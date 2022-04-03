@@ -42,16 +42,17 @@
 			border: none;
 			font-family: 'Readex Pro', sans-serif;
 			font-size: 16px;
-			font-weight: bold;
-			background-color: darken($red-color, 5%);
+			font-weight: 700;
+			background-color: $red-color;
 			border-radius: 5px;
 			padding: 8px 10px;
 			color: #fff;
-			border-bottom: 2px solid darken($red-color, 25%);
+			box-shadow: 0 0 5px 5px $red-color;
 			cursor: pointer;
 			transition: all 0.4s ease-in-out;
 			&:hover {
-				background-color: $red-color;
+				background-color: darken($red-color, 10%);
+				box-shadow: 0 0 5px 5px darken($red-color, 10%);
 			}
 			> svg {
 				font-size: 25px;
