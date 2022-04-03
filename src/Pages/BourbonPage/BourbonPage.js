@@ -61,13 +61,20 @@ const BourbonPage = ({
 		const caskersbaseurl = 'https://www.caskers.com/catalogsearch/result/?q=';
 		window.open(`${caskersbaseurl}${shopquery}`);
 	};
-
+	const handleGoBack = () => {
+		const bourbonsPageScrollPosition =
+			localStorage.getItem('bourbons_scrollPos') || '0';
+		navigate(-1);
+		setTimeout(() => {
+			window.scrollTo(0, parseInt(bourbonsPageScrollPosition));
+		}, 350);
+	};
 	return loading ? (
 		<Loading />
 	) : bourbon ? (
 		<div className={styles.container}>
 			<Head meta={meta} />
-			<button onClick={(e) => navigate(-1)}>Go Back</button>
+			<button onClick={() => handleGoBack()}>Go Back</button>
 			<div className={styles.details_wrapper}>
 				<h1 className={styles.title}>{bourbon.title}</h1>
 				<BourbonPricing
@@ -85,8 +92,8 @@ const BourbonPage = ({
 			</div>
 			<div className={styles.lower_container}>
 				<div className={styles.score_container}>
-					<p>Score</p>
 					<p>{bourbon.review.score ? bourbon.review.score : '?'}</p>
+					{/* <p>review score</p> */}
 				</div>
 				<img
 					src={bourbon.image}

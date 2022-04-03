@@ -6,6 +6,7 @@ import {
 	getUserCollectionById,
 	cleanupCollection,
 } from '../../Actions/collections';
+import UserSplash from '../../Components/UserSplash/UserSplash';
 import Search from '../../Components/Search/Search';
 import Loading from '../../Components/Loading/Loading';
 import Head from '../../Components/Head/Head';
@@ -44,9 +45,14 @@ const CollectionPage = ({
 	) : (
 		<div className={styles.container}>
 			<Head meta={meta} />
-			<h1>
+			{/* <h1>
 				{collection.name} <span> 🥃</span>
-			</h1>
+			</h1> */}
+			<UserSplash
+				type={'bourbons'}
+				name={collection.name}
+				category={'collection'}
+			/>
 			<Search handleSearch={handleSearch} />
 			<BourbonsGrid bourbons={bourbonsToDisplay} />
 		</div>

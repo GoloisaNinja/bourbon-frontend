@@ -16,7 +16,7 @@ const DashboardPage = ({ user, logoutUser }) => {
 					description: `Welcome to your hello bourbon dashboard ${user.username}!`,
 				}}
 			/>
-			<HeroSplash type={'dash'} textUpper={'Hello'} textLower={textLower} />
+			<HeroSplash type={'dash'} textUpper={'hello'} textLower={textLower} />
 			<DashboardGrid />
 			<div className={styles.leaving}>
 				<h2>Leaving us so soon? Hurry back, ok?</h2>

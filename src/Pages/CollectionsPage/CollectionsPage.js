@@ -20,7 +20,7 @@ const CollectionsPage = ({
 	setCollectionQuicklook,
 	cleanupQuicklook,
 }) => {
-	const textLower = <h1>Collections</h1>;
+	const textLower = <h1>collections</h1>;
 	useEffect(() => {
 		const fetchCollections = async () => {
 			await getUserCollections();
@@ -48,7 +48,7 @@ const CollectionsPage = ({
 			<ScrollToTop />
 			<HeroSplash
 				type={`collections`}
-				textUpper={`Your`}
+				textUpper={`your`}
 				textLower={textLower}
 			/>
 			<section className={styles.collections_section}>

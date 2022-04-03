@@ -14,7 +14,40 @@ $blue-text: #7aadff;
 	justify-content: center;
 	align-items: center;
 	background-color: #696969;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	max-width: 100%;
+	position: relative;
+}
+.score_container {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	//background: $dark-blue-accent;
+	color: #fff;
+	opacity: 0.8;
+	padding: 10px;
+	width: 67px;
+	border-radius: 50%;
+	> p {
+		margin: 0;
+		width: 100%;
+		font-weight: bold;
+		text-align: center;
+	}
+	> p:first-child {
+		text-align: center;
+		font-size: 28px;
+		border: 1px solid #fff;
+		border-radius: 50%;
+		padding: 5px;
+		background-color: $dark-blue-accent;
+		color: $blue-color;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+			rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	}
 }
 .image {
 	max-width: 100%;

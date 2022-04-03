@@ -4,10 +4,17 @@ import styles from './BourbonCard.module.scss';
 const BourbonCard = ({ bourbon }) => {
 	const { _id, image, title, bottler, distiller, abv, age } = bourbon;
 	const navigate = useNavigate();
+	const handleNavigate = () => {
+		localStorage.setItem('bourbons_scrollPos', window.pageYOffset);
+		navigate(`/bourbons/${_id}`);
+	};
 	return (
 		<div className={styles.card_container}>
 			<div className={styles.image_container}>
 				<img className={styles.image} src={image} alt={`bourbon ${title}`} />
+				<div className={styles.score_container}>
+					<p>{bourbon.review.score ? bourbon.review.score : '?'}</p>
+				</div>
 			</div>
 			<div className={styles.card_container_lower}>
 				<div className={styles.card_title}>
@@ -27,7 +34,7 @@ const BourbonCard = ({ bourbon }) => {
 							<tr>
 								<td>{bottler}</td>
 								<td>{distiller}</td>
-								<td>{abv}</td>
+								<td>{abv ? abv : 'unk'}</td>
 								<td>{age}</td>
 							</tr>
 						</tbody>
@@ -36,7 +43,7 @@ const BourbonCard = ({ bourbon }) => {
 				<div className={styles.card_button}>
 					<button
 						className={styles.bourbon_button}
-						onClick={(e) => navigate(`/bourbons/${_id}`)}>
+						onClick={() => handleNavigate()}>
 						See More
 					</button>
 				</div>

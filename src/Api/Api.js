@@ -183,7 +183,6 @@ export const getUserCollections = async () => {
 			`${baseURL}/collections?apiKey=${apikey}`,
 			config
 		);
-		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error.response);

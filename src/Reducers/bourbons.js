@@ -1,4 +1,8 @@
-import { GET_PAGINATED_FAILURE, GET_PAGINATED_SUCCESS } from '../Actions/types';
+import {
+	START_PAGINATED_FETCH,
+	GET_PAGINATED_FAILURE,
+	GET_PAGINATED_SUCCESS,
+} from '../Actions/types';
 
 const initialState = {
 	loading: true,
@@ -10,6 +14,11 @@ const initialState = {
 export default function bourbons(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
+		case START_PAGINATED_FETCH:
+			return {
+				...state,
+				loading: true,
+			};
 		case GET_PAGINATED_SUCCESS:
 			return {
 				...state,

@@ -1,9 +1,16 @@
-import { GET_PAGINATED_SUCCESS, GET_PAGINATED_FAILURE } from './types';
+import {
+	START_PAGINATED_FETCH,
+	GET_PAGINATED_SUCCESS,
+	GET_PAGINATED_FAILURE,
+} from './types';
 import { setAlert } from './alert';
 import { getPaginatedBourbons as getBourbons } from '../Api/Api';
 
 export const getPaginatedBourbons =
 	(page, search, sort) => async (dispatch) => {
+		dispatch({
+			type: START_PAGINATED_FETCH,
+		});
 		const response = await getBourbons(page, search, sort);
 		if (response) {
 			if (response.status === 200) {

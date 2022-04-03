@@ -12,7 +12,7 @@ const styles = {
 const LandingPage = () => {
 	const textLower = (
 		<h1>
-			Bourb<span style={styles.pink_span}>(on)</span>
+			bourb<span style={styles.pink_span}>(on)</span>
 		</h1>
 	);
 	return (
@@ -23,7 +23,7 @@ const LandingPage = () => {
 					description: `The hello bourbon home page | find your next great bourbon adventure!`,
 				}}
 			/>
-			<HeroSplash type={`home`} textUpper='Hello' textLower={textLower} />
+			<HeroSplash type={`home`} textUpper='hello' textLower={textLower} />
 			<LandingText />
 		</div>
 	);

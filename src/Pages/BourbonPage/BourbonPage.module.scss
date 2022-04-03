@@ -71,29 +71,33 @@
 	}
 }
 .score_container {
+	display: flex;
+	align-items: center;
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: linear-gradient(to left, $blue-color 20%, $pink-color 60%);
+	//background: $dark-blue-accent;
 	color: #fff;
-	padding: 10px 25px 15px 25px;
+	opacity: 0.8;
+	padding: 10px;
+	width: 67px;
+	border-radius: 50%;
 	> p {
 		margin: 0;
 		width: 100%;
 		font-weight: bold;
 		text-align: center;
 	}
-	> p:last-child {
+	> p:first-child {
 		text-align: center;
 		font-size: 28px;
-		font-weight: bold;
 		border: 1px solid #fff;
 		border-radius: 50%;
 		padding: 5px;
-		margin-top: 5px;
-		background-color: #fff;
-		color: darken($pink-color, 15%);
-		text-shadow: 1px 0px 1px #474747;
+		background-color: $dark-blue-accent;
+		color: $blue-color;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+			rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 	}
 }
 .card_grid {

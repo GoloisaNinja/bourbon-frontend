@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
+import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import Search from '../../Components/Search/Search';
 import BourbonsPageFilters from '../../Components/Filters/BourbonsPageFilters';
 import Loading from '../../Components/Loading/Loading';
@@ -91,16 +92,23 @@ const BourbonsPage = ({
 		};
 		fetchBourbons();
 	}, [location.search, returnParams, getPaginatedBourbons]);
+
+	const textLower = (
+		<h1>
+			obsessi<span className={styles.pink_span}>(on)</span>
+		</h1>
+	);
 	return loading ? (
 		<Loading />
 	) : (
 		<div>
 			<Head meta={meta} />
-			<div className={styles.intro}>
+			{/* <div className={styles.intro}>
 				<h1>
 					Find your next obsession <span> 🥃</span>
 				</h1>
-			</div>
+			</div> */}
+			<HeroSplash type={'bourbons'} textUpper={'hello'} textLower={textLower} />
 			<Search handleSearch={handleSearch} />
 			<BourbonsPageFilters handleSort={handleSort} />
 			<BourbonsGrid bourbons={bourbons} />

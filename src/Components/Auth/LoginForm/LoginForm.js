@@ -9,6 +9,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 const LoginForm = ({ loginUser }) => {
 	const [formData, setFormData] = useState({});
 	const navigate = useNavigate();
+	const guestPass = process.env.REACT_APP_GUEST_PASSWORD;
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		smoothscroll.polyfill();
@@ -16,6 +17,9 @@ const LoginForm = ({ loginUser }) => {
 		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 		navigate('/dashboard');
 		loginUser(email, password);
+	};
+	const handleLoginAsGuest = () => {
+		loginUser('bourb_guest@guest.com', guestPass);
 	};
 	return (
 		<div className={styles.form_wrapper}>
@@ -39,6 +43,10 @@ const LoginForm = ({ loginUser }) => {
 			<div>
 				<p>No account?</p>
 				<Link to='/register'>Register here</Link>
+			</div>
+			<div>
+				<p>Just exploring?</p>
+				<button onClick={() => handleLoginAsGuest()}>Login as Guest</button>
 			</div>
 		</div>
 	);

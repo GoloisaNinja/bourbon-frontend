@@ -33,7 +33,7 @@ const ReviewsPage = ({
 		setDashboardReview(review);
 	};
 
-	const textLower = <h1>Reviews</h1>;
+	const textLower = <h1>reviews</h1>;
 
 	return loading ? (
 		<Loading />
@@ -46,7 +46,7 @@ const ReviewsPage = ({
 				}}
 			/>
 			<ScrollToTop />
-			<HeroSplash type={`reviews`} textUpper={`Your`} textLower={textLower} />
+			<HeroSplash type={`reviews`} textUpper={`your`} textLower={textLower} />
 			<section className={styles.reviews_section}>
 				<ContentList
 					content={reviews}

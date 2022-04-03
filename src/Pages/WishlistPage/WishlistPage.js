@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUserWishlistById, cleanupWishlist } from '../../Actions/wishlists';
+import UserSplash from '../../Components/UserSplash/UserSplash';
 import Search from '../../Components/Search/Search';
 import Loading from '../../Components/Loading/Loading';
 import Head from '../../Components/Head/Head';
@@ -41,9 +42,14 @@ const WishlistPage = ({
 	) : (
 		<div className={styles.container}>
 			<Head meta={meta} />
-			<h1>
+			{/* <h1>
 				{wishlist.name} <span> 🥃</span>
-			</h1>
+			</h1> */}
+			<UserSplash
+				type={'bourbons'}
+				name={wishlist.name}
+				category={'wishlist'}
+			/>
 			<Search handleSearch={handleSearch} />
 			<BourbonsGrid bourbons={bourbonsToDisplay} />
 		</div>

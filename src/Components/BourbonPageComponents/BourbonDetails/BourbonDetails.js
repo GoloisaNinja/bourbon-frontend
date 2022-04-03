@@ -9,7 +9,7 @@ const BourbonDetails = ({ abv, age, bottler, distiller }) => {
 			<FeatureCard
 				feature={{
 					icon: FaGlassWhiskey,
-					title: abv,
+					title: abv ? abv : 'unknown',
 					content: 'ABV',
 				}}
 			/>

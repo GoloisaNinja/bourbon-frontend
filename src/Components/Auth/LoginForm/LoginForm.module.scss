@@ -10,7 +10,7 @@
 	padding: 15px;
 	margin: 0 auto;
 	min-height: 100vh;
-	> div:last-child {
+	> div:nth-child(2) {
 		display: flex;
 		align-items: center;
 		> a {
@@ -21,6 +21,33 @@
 		}
 		> p {
 			color: #fff;
+		}
+	}
+	> div:last-child {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		> p {
+			color: #fff;
+		}
+		> button {
+			background: none;
+			border: none;
+			background-color: $red-color;
+			font-family: 'Readex Pro', sans-serif;
+			font-size: 16px;
+			font-weight: bold;
+			color: #fff;
+			padding: 10px;
+			border-radius: 5px;
+			border-bottom: 2px solid darken($red-color, 25%);
+			cursor: pointer;
+			transition: all 0.4s ease-in-out;
+			&:hover {
+				background-color: darken($red-color, 10%);
+			}
 		}
 	}
 	> form {

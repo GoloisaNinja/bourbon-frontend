@@ -20,7 +20,7 @@ const WishlistsPage = ({
 	setWishlistQuicklook,
 	cleanupQuicklook,
 }) => {
-	const textLower = <h1>Wishlists</h1>;
+	const textLower = <h1>wishlists</h1>;
 	useEffect(() => {
 		const fetchWishlists = async () => {
 			await getUserWishlists();
@@ -46,7 +46,7 @@ const WishlistsPage = ({
 				}}
 			/>
 			<ScrollToTop />
-			<HeroSplash type={`wishlists`} textUpper={`Your`} textLower={textLower} />
+			<HeroSplash type={`wishlists`} textUpper={`your`} textLower={textLower} />
 			<section className={styles.wishlists_section}>
 				<ContentList
 					content={wishlists}
