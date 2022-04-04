@@ -26,7 +26,7 @@ export const getPaginatedBourbons = async (page, search, sort) => {
 			return response;
 		}
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -39,7 +39,6 @@ export const getSingleBourbon = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -53,11 +52,9 @@ export const getBourbonReviews = async (id) => {
 		const response = await axios.get(
 			`${baseURL}/reviews/${id}?apiKey=${apikey}`
 		);
-		if (response.status === 200) {
-			return response;
-		}
+		return response;
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -70,7 +67,6 @@ export const getUserBourbonReviews = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -92,11 +88,9 @@ export const postBourbonReview = async (formData) => {
 			body,
 			config
 		);
-		if (response.status === 201) {
-			return response;
-		}
+		return response;
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -164,7 +158,6 @@ export const postUserCollection = async (formData) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -185,7 +178,6 @@ export const getUserCollections = async () => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -206,7 +198,6 @@ export const getUserCollectionById = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -229,7 +220,6 @@ export const editUserCollection = async (id, formData) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -252,7 +242,6 @@ export const addBourbonToUserCollection = async (collectionId, bourbonId) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -276,7 +265,6 @@ export const deleteBourbonFromUserCollection = async (
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -297,7 +285,6 @@ export const deleteUserCollection = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -322,7 +309,6 @@ export const postUserWishlist = async (formData) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -343,7 +329,6 @@ export const getUserWishlists = async () => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -364,7 +349,6 @@ export const getUserWishlistById = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -387,7 +371,6 @@ export const editUserWishlist = async (id, formData) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -410,7 +393,6 @@ export const addBourbonToUserWishlist = async (wishlistId, bourbonId) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -431,7 +413,6 @@ export const deleteBourbonFromUserWishlist = async (wishlistId, bourbonId) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -452,7 +433,6 @@ export const deleteUserWishlist = async (id) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };
@@ -474,7 +454,6 @@ export const loginUser = async (email, password) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.repsonse);
 		return error.response;
 	}
 };
@@ -496,10 +475,10 @@ export const logoutUser = async () => {
 		);
 		if (response.status === 200) {
 			localStorage.removeItem('token');
-			return response.status;
+			return response;
 		}
 	} catch (error) {
-		console.log(error);
+		return error.response;
 	}
 };
 
@@ -520,7 +499,6 @@ export const registerUser = async (formData) => {
 		);
 		return response;
 	} catch (error) {
-		console.log(error.response);
 		return error.response;
 	}
 };

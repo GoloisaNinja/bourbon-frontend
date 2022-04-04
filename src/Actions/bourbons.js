@@ -12,18 +12,11 @@ export const getPaginatedBourbons =
 			type: START_PAGINATED_FETCH,
 		});
 		const response = await getBourbons(page, search, sort);
-		if (response) {
-			if (response.status === 200) {
-				dispatch({
-					type: GET_PAGINATED_SUCCESS,
-					payload: response.data,
-				});
-			} else {
-				dispatch({
-					type: GET_PAGINATED_FAILURE,
-				});
-				dispatch(setAlert('Uh-oh! No bourbons!', 'danger'));
-			}
+		if (response.status === 200) {
+			dispatch({
+				type: GET_PAGINATED_SUCCESS,
+				payload: response.data,
+			});
 			return response.data.meta;
 		} else {
 			dispatch({

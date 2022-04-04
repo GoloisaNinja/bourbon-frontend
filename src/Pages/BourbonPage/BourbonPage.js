@@ -59,7 +59,11 @@ const BourbonPage = ({
 		window.open(`${caskersbaseurl}${shopquery}`);
 	};
 	const handleGoBack = () => {
-		navigate(location.state.navFrom, { state: location.state.pageScrollPos });
+		if (location.state !== null) {
+			navigate(location.state.navFrom, { state: location.state.pageScrollPos });
+		} else {
+			navigate(-1);
+		}
 	};
 	return loading ? (
 		<Loading />

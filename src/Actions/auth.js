@@ -42,7 +42,7 @@ export const logoutUser = () => async (dispatch) => {
 	});
 	const token = localStorage.getItem('token');
 	const response = await endSession(token);
-	if (response === 200) {
+	if (response.status === 200) {
 		dispatch({
 			type: LOGOUT_SUCCESS,
 		});

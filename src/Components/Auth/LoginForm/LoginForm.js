@@ -19,6 +19,7 @@ const LoginForm = ({ loginUser }) => {
 		loginUser(email, password);
 	};
 	const handleLoginAsGuest = () => {
+		navigate('/dashboard');
 		loginUser('bourb_guest@guest.com', guestPass);
 	};
 	return (
