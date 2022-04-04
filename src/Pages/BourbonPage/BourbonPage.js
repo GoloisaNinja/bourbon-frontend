@@ -37,9 +37,6 @@ const BourbonPage = ({
 	const [show, setShow] = useState(false);
 	const [meta, setMeta] = useState({});
 	useEffect(() => {
-		if (typeof window !== undefined) {
-			window.scroll(0, 0);
-		}
 		const fetchBourbonData = async () => {
 			const response = await getSingleBourbon(bourbonId);
 			setMeta(response);

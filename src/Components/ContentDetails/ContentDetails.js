@@ -4,7 +4,6 @@ import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import ContentForm from '../ContentForm/ContentForm';
 import Modal from '../Modal/Modal';
 import ConfirmCancel from '../Modal/ConfirmCancel';
-import smoothscroll from 'smoothscroll-polyfill';
 import styles from './ContentDetails.module.scss';
 
 const ContentDetails = ({ contentObject, type }) => {
@@ -25,10 +24,7 @@ const ContentDetails = ({ contentObject, type }) => {
 		setBourbonToDelete({ id, title });
 		handleDeleteBourbonModal();
 	};
-	const scrollToTop = () => {
-		smoothscroll.polyfill();
-		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-	};
+
 	return (
 		<div className={styles.container}>
 			{contentObject ? (
@@ -55,8 +51,7 @@ const ContentDetails = ({ contentObject, type }) => {
 									type === 'Collection'
 										? `/collections/${contentObject._id}`
 										: `/wishlists/${contentObject._id}`
-								}
-								onClick={() => scrollToTop()}>
+								}>
 								{`Go to ${type}`}
 							</Link>
 						</div>
@@ -82,7 +77,6 @@ const ContentDetails = ({ contentObject, type }) => {
 									<p>{`${type} is empty! Go add some bourbons!`}</p>
 									<Link
 										className={styles.btn_explore}
-										onClick={() => scrollToTop()}
 										to={`/bourbons?sort=title_asc`}>
 										Go Explore!
 									</Link>

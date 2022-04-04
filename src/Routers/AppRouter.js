@@ -15,6 +15,7 @@ import WishlistsPage from '../Pages/WishlistsPage/WishlistsPage';
 import WishlistPage from '../Pages/WishlistPage/WishlistPage';
 import NotFound from '../Pages/NotFound/NotFound';
 import PrivateRoute from '../Components/Routing/PrivateRoute';
+import ScrollToTop from '../Components/ScrollToTop/ScrollToTop';
 
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -25,6 +26,7 @@ const AppRouter = () => {
 			<Router>
 				<Header />
 				<Alert />
+				<ScrollToTop />
 				<Routes>
 					<Route path='/' element={<LandingPage />} />
 					<Route path='/login' element={<LoginPage />} />

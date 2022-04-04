@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import Search from '../../Components/Search/Search';
+import FilterDetails from '../../Components/Filters/FilterDetails';
 import BourbonsPageFilters from '../../Components/Filters/BourbonsPageFilters';
 import Loading from '../../Components/Loading/Loading';
 import Head from '../../Components/Head/Head';
@@ -18,6 +19,8 @@ const BourbonsPage = ({
 	getPaginatedBourbons,
 }) => {
 	const [currentPage, setCurrentPage] = useState(1);
+	const [paramSearchTerm, setParamSearchTerm] = useState('');
+	const [paramSorts, setParamSorts] = useState('');
 	const [meta, setMeta] = useState({});
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -84,6 +87,8 @@ const BourbonsPage = ({
 			try {
 				const response = await getPaginatedBourbons(page, search, sort);
 				setCurrentPage(parseInt(page));
+				setParamSearchTerm(search);
+				setParamSorts(sort);
 				setMeta(response);
 			} catch (error) {
 				console.log(error);
@@ -91,14 +96,6 @@ const BourbonsPage = ({
 		};
 		fetchBourbons();
 	}, [location.search, returnParams, getPaginatedBourbons]);
-
-	useEffect(() => {
-		if (typeof window !== undefined) {
-			if (location.state) {
-				window.scrollTo({ top: location.state, left: 0 });
-			}
-		}
-	}, [location]);
 
 	const textLower = (
 		<h1>
@@ -110,14 +107,10 @@ const BourbonsPage = ({
 	) : (
 		<div>
 			<Head meta={meta} />
-			{/* <div className={styles.intro}>
-				<h1>
-					Find your next obsession <span> 🥃</span>
-				</h1>
-			</div> */}
 			<HeroSplash type={'bourbons'} textUpper={'hello'} textLower={textLower} />
 			<Search handleSearch={handleSearch} />
 			<BourbonsPageFilters handleSort={handleSort} />
+			<FilterDetails searchTerm={paramSearchTerm} sorts={paramSorts} />
 			<BourbonsGrid bourbons={bourbons} />
 			{bourbons.length > 0 && (
 				<>

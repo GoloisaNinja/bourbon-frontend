@@ -16,6 +16,7 @@ const Search = ({ handleSearch }) => {
 					type='text'
 					value={searchTerm}
 					placeholder='ex. barton'
+					onKeyDown={(e) => e.code === 'Enter' && handleClick()}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 				<button onClick={(e) => handleClick()}>

@@ -45,9 +45,6 @@ const CollectionPage = ({
 	) : (
 		<div className={styles.container}>
 			<Head meta={meta} />
-			{/* <h1>
-				{collection.name} <span> 🥃</span>
-			</h1> */}
 			<UserSplash
 				type={'bourbons'}
 				name={collection.name}

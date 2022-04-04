@@ -11,7 +11,6 @@ import Head from '../../Components/Head/Head';
 import HeroSplash from '../../Components/HeroSplash/HeroSplash';
 import ContentList from '../../Components//ContentList/ContentList';
 import ContentDetails from '../../Components/ContentDetails/ContentDetails';
-import ScrollToTop from '../../Components/ScrollToTop/ScrollToTop';
 import styles from './CollectionsPage.module.scss';
 
 const CollectionsPage = ({
@@ -45,7 +44,6 @@ const CollectionsPage = ({
 					description: `hello bourbon Collections | All your collections in one spot!`,
 				}}
 			/>
-			<ScrollToTop />
 			<HeroSplash
 				type={`collections`}
 				textUpper={`your`}

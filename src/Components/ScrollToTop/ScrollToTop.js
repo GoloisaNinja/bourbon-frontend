@@ -4,10 +4,15 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 const ScrollToTop = () => {
 	const routePath = useLocation();
+
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			smoothscroll.polyfill();
-			window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+			window.scroll({
+				top: routePath.state ? routePath.state : 0,
+				left: 0,
+				behavior: 'smooth',
+			});
 		}
 	}, [routePath]);
 
