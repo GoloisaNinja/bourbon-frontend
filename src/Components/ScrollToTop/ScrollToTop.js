@@ -8,11 +8,13 @@ const ScrollToTop = () => {
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			smoothscroll.polyfill();
-			window.scroll({
-				top: routePath.state ? routePath.state : 0,
-				left: 0,
-				behavior: 'smooth',
-			});
+			setTimeout(() => {
+				window.scroll({
+					top: routePath.state ? routePath.state : 0,
+					left: 0,
+					behavior: 'smooth',
+				});
+			}, 500);
 		}
 	}, [routePath]);
 
