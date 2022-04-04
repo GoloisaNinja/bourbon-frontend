@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getPaginatedBourbons } from '../../Actions/bourbons';
+import { getPaginatedBourbons, cleanUpBourbons } from '../../Actions/bourbons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,6 +17,7 @@ import styles from './BourbonsPage.module.scss';
 const BourbonsPage = ({
 	bourbons: { loading, bourbons, last_page },
 	getPaginatedBourbons,
+	cleanUpBourbons,
 }) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [paramSearchTerm, setParamSearchTerm] = useState('');
@@ -95,7 +96,9 @@ const BourbonsPage = ({
 			}
 		};
 		fetchBourbons();
-	}, [location.search, returnParams, getPaginatedBourbons]);
+
+		return () => cleanUpBourbons();
+	}, [location.search, returnParams, getPaginatedBourbons, cleanUpBourbons]);
 
 	const textLower = (
 		<h1>
@@ -110,7 +113,11 @@ const BourbonsPage = ({
 			<HeroSplash type={'bourbons'} textUpper={'hello'} textLower={textLower} />
 			<Search handleSearch={handleSearch} />
 			<BourbonsPageFilters handleSort={handleSort} />
-			<FilterDetails searchTerm={paramSearchTerm} sorts={paramSorts} />
+			<FilterDetails
+				searchTerm={paramSearchTerm}
+				sorts={paramSorts}
+				page={currentPage}
+			/>
 			<BourbonsGrid bourbons={bourbons} />
 			{bourbons.length > 0 && (
 				<>
@@ -140,10 +147,14 @@ const BourbonsPage = ({
 BourbonsPage.propTypes = {
 	bourbons: PropTypes.object.isRequired,
 	getPaginatedBourbons: PropTypes.func.isRequired,
+	cleanUpBourbons: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	bourbons: state.bourbons,
 });
 
-export default connect(mapStateToProps, { getPaginatedBourbons })(BourbonsPage);
+export default connect(mapStateToProps, {
+	getPaginatedBourbons,
+	cleanUpBourbons,
+})(BourbonsPage);

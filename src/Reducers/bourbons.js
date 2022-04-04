@@ -2,6 +2,7 @@ import {
 	START_PAGINATED_FETCH,
 	GET_PAGINATED_FAILURE,
 	GET_PAGINATED_SUCCESS,
+	CLEANUP_BOURBONS,
 } from '../Actions/types';
 
 const initialState = {
@@ -32,6 +33,14 @@ export default function bourbons(state = initialState, action) {
 				...state,
 				loading: false,
 				bourbons: [],
+			};
+		case CLEANUP_BOURBONS:
+			return {
+				...state,
+				loading: true,
+				bourbons: [],
+				total_records: 0,
+				last_page: 0,
 			};
 		default:
 			return state;
