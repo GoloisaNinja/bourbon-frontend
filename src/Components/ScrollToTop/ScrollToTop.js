@@ -14,9 +14,8 @@ const ScrollToTop = ({ bourbonLoadingState }) => {
 					window.scroll({
 						top: routePath.state.pageScrollPos,
 						left: 0,
-						behavior: 'smooth',
 					});
-				} else if (!bourbonLoadingState && routePath.state === null) {
+				} else if (routePath.state === null) {
 					window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 				}
 			} else {

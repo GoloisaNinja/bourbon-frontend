@@ -47,12 +47,16 @@ const BourbonsPage = ({
 		return { page, search, sort };
 	}, [location]);
 
-	const handlePage = async (direction) => {
-		smoothscroll.polyfill();
-		const pageParams = await returnParams();
+	const getSearchElementYOffset = () => {
 		const searchEl = document.getElementById('search');
 		const searchElYOffset =
 			searchEl.getBoundingClientRect().top + window.pageYOffset;
+		return searchElYOffset;
+	};
+
+	const handlePage = async (direction) => {
+		smoothscroll.polyfill();
+		const pageParams = await returnParams();
 		const { search, sort } = pageParams;
 		let baseLocation = `/bourbons?`;
 		if (search) {
@@ -61,12 +65,12 @@ const BourbonsPage = ({
 		if (direction) {
 			setCurrentPage(currentPage + 1);
 			navigate(`${baseLocation}sort=${sort}&page=${currentPage + 1}`, {
-				state: { pageScrollPos: searchElYOffset },
+				state: { pageScrollPos: getSearchElementYOffset() },
 			});
 		} else {
 			setCurrentPage(currentPage - 1);
 			navigate(`${baseLocation}sort=${sort}&page=${currentPage - 1}`, {
-				state: { pageScrollPos: searchElYOffset },
+				state: { pageScrollPos: getSearchElementYOffset() },
 			});
 		}
 	};
@@ -74,7 +78,9 @@ const BourbonsPage = ({
 	const handleSearch = async (searchTerm) => {
 		const pageParams = await returnParams();
 		const { sort } = pageParams;
-		navigate(`/bourbons?search=${searchTerm}&sort=${sort}`);
+		navigate(`/bourbons?search=${searchTerm}&sort=${sort}`, {
+			state: { pageScrollPos: getSearchElementYOffset() },
+		});
 	};
 
 	const handleSort = async (sortby, sortdirection) => {
@@ -84,7 +90,9 @@ const BourbonsPage = ({
 		if (search) {
 			baseLocation = `/bourbons?search=${search}&`;
 		}
-		navigate(`${baseLocation}sort=${sortby}_${sortdirection}`);
+		navigate(`${baseLocation}sort=${sortby}_${sortdirection}`, {
+			state: { pageScrollPos: getSearchElementYOffset() },
+		});
 	};
 
 	useEffect(() => {
