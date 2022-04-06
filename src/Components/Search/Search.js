@@ -9,7 +9,7 @@ const Search = ({ handleSearch }) => {
 		handleSearch(search);
 	};
 	return (
-		<div className={styles.search_container}>
+		<div className={styles.search_container} id='search'>
 			<h2>Search</h2>
 			<div>
 				<input

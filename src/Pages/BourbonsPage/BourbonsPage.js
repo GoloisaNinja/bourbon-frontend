@@ -50,6 +50,9 @@ const BourbonsPage = ({
 	const handlePage = async (direction) => {
 		smoothscroll.polyfill();
 		const pageParams = await returnParams();
+		const searchEl = document.getElementById('search');
+		const searchElYOffset =
+			searchEl.getBoundingClientRect().top + window.pageYOffset;
 		const { search, sort } = pageParams;
 		let baseLocation = `/bourbons?`;
 		if (search) {
@@ -57,12 +60,15 @@ const BourbonsPage = ({
 		}
 		if (direction) {
 			setCurrentPage(currentPage + 1);
-			navigate(`${baseLocation}sort=${sort}&page=${currentPage + 1}`);
+			navigate(`${baseLocation}sort=${sort}&page=${currentPage + 1}`, {
+				state: { pageScrollPos: searchElYOffset },
+			});
 		} else {
 			setCurrentPage(currentPage - 1);
-			navigate(`${baseLocation}sort=${sort}&page=${currentPage - 1}`);
+			navigate(`${baseLocation}sort=${sort}&page=${currentPage - 1}`, {
+				state: { pageScrollPos: searchElYOffset },
+			});
 		}
-		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	};
 
 	const handleSearch = async (searchTerm) => {
@@ -105,9 +111,7 @@ const BourbonsPage = ({
 			obsessi<span className={styles.pink_span}>(on)</span>
 		</h1>
 	);
-	return loading ? (
-		<Loading />
-	) : (
+	return (
 		<div>
 			<Head meta={meta} />
 			<HeroSplash type={'bourbons'} textUpper={'hello'} textLower={textLower} />
@@ -118,26 +122,32 @@ const BourbonsPage = ({
 				sorts={paramSorts}
 				page={currentPage}
 			/>
-			<BourbonsGrid bourbons={bourbons} />
-			{bourbons.length > 0 && (
+			{loading ? (
+				<Loading />
+			) : (
 				<>
-					<div className={styles.btn_group}>
-						<button
-							disabled={currentPage <= 1}
-							onClick={(e) => handlePage(false)}>
-							<BsChevronLeft />
-						</button>
-						<button
-							disabled={currentPage === last_page}
-							onClick={(e) => handlePage(true)}>
-							<BsChevronRight />
-						</button>
-					</div>
-					<div className={styles.pages}>
-						<p>
-							Page {currentPage} of {last_page}
-						</p>
-					</div>
+					<BourbonsGrid bourbons={bourbons} />
+					{bourbons.length > 0 && (
+						<>
+							<div className={styles.btn_group}>
+								<button
+									disabled={currentPage <= 1}
+									onClick={(e) => handlePage(false)}>
+									<BsChevronLeft />
+								</button>
+								<button
+									disabled={currentPage === last_page}
+									onClick={(e) => handlePage(true)}>
+									<BsChevronRight />
+								</button>
+							</div>
+							<div className={styles.pages}>
+								<p>
+									Page {currentPage} of {last_page}
+								</p>
+							</div>
+						</>
+					)}
 				</>
 			)}
 		</div>

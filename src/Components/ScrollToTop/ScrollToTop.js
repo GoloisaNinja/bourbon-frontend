@@ -9,11 +9,16 @@ const ScrollToTop = ({ bourbonLoadingState }) => {
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			smoothscroll.polyfill();
-			if (routePath.pathname === '/bourbons' && !bourbonLoadingState) {
-				window.scroll({
-					top: routePath.state ? routePath.state : 0,
-					left: 0,
-				});
+			if (routePath.pathname === '/bourbons') {
+				if (!bourbonLoadingState && routePath.state) {
+					window.scroll({
+						top: routePath.state.pageScrollPos,
+						left: 0,
+						behavior: 'smooth',
+					});
+				} else if (!bourbonLoadingState && routePath.state === null) {
+					window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+				}
 			} else {
 				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			}

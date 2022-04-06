@@ -60,7 +60,11 @@ const BourbonPage = ({
 	};
 	const handleGoBack = () => {
 		if (location.state !== null) {
-			navigate(location.state.navFrom, { state: location.state.pageScrollPos });
+			navigate(location.state.navFrom, {
+				state: {
+					pageScrollPos: location.state.pageScrollPos,
+				},
+			});
 		} else {
 			navigate(-1);
 		}
