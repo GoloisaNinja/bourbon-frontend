@@ -2,7 +2,7 @@ import axios from 'axios';
 const prod = true;
 const configObject = {
 	prod: {
-		url: 'https://bourbon-backend.herokuapp.com/api',
+		url: 'https://bourbon-backend.onrender.com/api',
 		apiKey: process.env.REACT_APP_BOURBON_PROD_API_KEY,
 	},
 	dev: {
